@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="info.humedical.healthcare_mania_release">
    <application
-        android:label="healthcare_mania_release"
+        android:label="Healthcare Mania"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

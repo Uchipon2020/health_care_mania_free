@@ -21,10 +21,11 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
   dynamic dateFormat;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     dateFormat = DateTime.now();
-    dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);}
+    dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);
+  }
 
 
   TextEditingController heightController = TextEditingController();
@@ -53,7 +54,10 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.subtitle1;
+    TextStyle textStyle = Theme
+        .of(context)
+        .textTheme
+        .subtitle1;
 
     heightController.text = widget.model.height_1;
     weightController.text = widget.model.weight_2;
@@ -127,13 +131,14 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                       );
                     }).toList(),
                     style: textStyle,
-                    value: getPriorityAsString(widget.model.priority), onChanged: (String value) {  },
+                    value: getPriorityAsString(widget.model.priority),
+                    onChanged: (String value) {},
                   ),
                 ),
                 // 24 Element　受診日
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
-                  child:TextField(
+                  child: TextField(
                     focusNode: AlwaysDisabledFocusNode(),
                     controller: onTheDayController,
                     style: textStyle,
@@ -420,7 +425,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:2.5,bottom: 2.5),
+                        padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
                         child: Row(
                           children: <Widget>[
                             Expanded(
@@ -595,7 +600,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                       ),
                       //血糖検査
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0,bottom: 2.5),
+                        padding: const EdgeInsets.only(top: 15.0, bottom: 2.5),
                         child: Row(
                           children: <Widget>[
                             Expanded(
@@ -681,113 +686,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
     }
     return priority;
   }
-/*
-  // Update the title of Note object
-  void updateHeight() {
-    widget.model.height_1 = heightController.text;
-  }
-
-  // Update the title of Note object
-  void updateWeight() {
-    widget.model.weight_2 = weightController.text;
-  }
-
-  // Update the right_eyes of Note object
-  void updateREye() {
-    widget.model.right_eye_4 = rEyeController.text;
-  }
-
-  // Update the left_eyes of Note object
-  void updateLEye() {
-    widget.model.left_eye_5 = lEyeController.text;
-  }
-
-  void updateHearing_r_1000() {
-    widget.model.hearing_right_1000_6 = hR1000Controller.text;
-  }
-
-  void updateHearing_l_1000() {
-    widget.model.hearing_left_1000_7 = hL1000Controller.text;
-  }
-
-  void updateHearing_r_4000() {
-    widget.model.hearing_right_4000_8 = hR4000Controller.text;
-  }
-
-  void updateHearing_l_4000() {
-    widget.model.hearing_left_4000_9 = hL4000Controller.text;
-  }
-
-  void updateXray() {
-    widget.model.x_ray_10 = xRayController.text;
-  }
-
-  void updateRedblood() {
-    widget.model.red_blood_13 = rBController.text;
-  }
-
-  void updateHemo() {
-    widget.model.hemoglobin_14 = hEmoController.text;
-  }
-
-  void updateGot() {
-    widget.model.got_15 = gOtController.text;
-  }
-
-  void updateGpt() {
-    widget.model.gpt_16 = gPtController.text;
-  }
-
-  void updateGtp() {
-    widget.model.gtp_17 = gTpController.text;
-  }
-
-  void updateLdl() {
-    widget.model.ldl_18 = lDlController.text;
-  }
-
-  void updateHdl() {
-    widget.model.hdl_19 = hDlController.text;
-  }
-
-  void updateNeutralfat() {
-    widget.model.neutral_fat_20 = nFatController.text;
-  }
-
-  void updateBloodglucose() {
-    widget.model.blood_glucose_21 = bGluController.text;
-  }
-
-  void updateHA1c() {
-    widget.model.hA1c_22 = hA1cController.text;
-  }
-
-  void updateEcg() {
-    widget.model.ecg_23 = eCgController.text;
-  }
-
-  // Update the low_blood_pressure of Note object
-  void updateLBp() {
-    widget.model.low_blood_pressure_11 = lBpController.text;
-  }
-
-  // Update the high_blood_pressure of Note object
-  void updateHBp() {
-    widget.model.high_blood_pressure_12 = hBpController.text;
-  }
-
-  // Update the on_the_day of Note object
-  void updateOTD() {
-    widget.model.on_the_day_24 = onTheDayController.text;
-    if (kDebugMode) {
-      print('${onTheDayController.text}アップデートメソッドの中のテキスト');
-    }
-    if (kDebugMode) {
-      print(widget.model.on_the_day_24);
-    }
-  }*/
 }
-
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
