@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 class ModelDetailScreen extends StatefulWidget {
   final String appBarTitle;
   final Model model;
-  const ModelDetailScreen({Key key, this.appBarTitle, this.model}) : super(key:key);
+  const ModelDetailScreen({Key key, this.appBarTitle, this.model})
+      : super(key: key);
 
   @override
   State<ModelDetailScreen> createState() => _ModelDetailScreenState();
@@ -22,11 +23,11 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   dynamic dateFormat;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     dateFormat = DateTime.now();
-    dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);}
-
+    dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);
+  }
 
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
@@ -80,8 +81,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     hA1cController.text = widget.model.hA1c_22;
     eCgController.text = widget.model.ecg_23;
     if (onTheDayController.text == null) {
-      onTheDayController.text =
-          DateFormat("yyyy年MM月dd日").format(dateFormat);
+      onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
       if (kDebugMode) {
         print('$dateFormat');
       }
@@ -95,7 +95,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
             currentFocus.focusedChild.unfocus();
           }
         },
-
         child: Scaffold(
           appBar: AppBar(
             title: Text(widget.appBarTitle),
@@ -111,35 +110,17 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
             child: ListView(
               children: <Widget>[
                 // First element　定期健康診断か人間ドックかプルダウンで選ぶ
-                ListTile(
-                  title: DropdownButton(
-                      items: _priorities.map((String dropDownStringItem) {
-                        return DropdownMenuItem<String>(
-                          value: dropDownStringItem,
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              dropDownStringItem,
-                              style: const TextStyle(
-                                fontSize: 20.5,
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                      style: textStyle,
-                      value: getPriorityAsString(widget.model.priority),
-                      onChanged: (valueSelectedByUser) {
-                        setState(() {
-                          debugPrint('User selected $valueSelectedByUser');
-                          updatePriorityAsInt(valueSelectedByUser);
-                        });
-                      }),
-                ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('      健康診断',
+                    style: TextStyle(
+                      fontSize: 20.5,
+                    ),),
+                  ),
                 // 24 Element　受診日
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
-                  child:TextField(
+                  child: TextField(
                     focusNode: AlwaysDisabledFocusNode(),
                     controller: onTheDayController,
                     style: textStyle,
@@ -149,7 +130,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       debugPrint('オンタップでカレンダーが表示されているはず');
                       onTheDayController.text = dateNow;
                     },
-
                     onChanged: (value) {
                       setState(() {
                         onTheDayController.text = dateNow;
@@ -480,7 +460,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:2.5,bottom: 2.5),
+                        padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
                         child: Row(
                           children: <Widget>[
                             Expanded(
@@ -501,7 +481,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                     suffix: const Text(' 万/μL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -525,7 +505,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                     suffix: const Text(' g/dL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                           ],
@@ -555,7 +535,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                     suffix: const Text(' U/L'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -579,7 +559,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                     suffix: const Text(' U/L'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -603,7 +583,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                     suffix: const Text(' U/L'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                           ],
@@ -632,7 +612,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                     suffix: const Text(' mg/dL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -656,7 +636,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                     suffix: const Text(' mg/dL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -680,7 +660,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                     suffix: const Text(' mg/dL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                           ],
@@ -688,7 +668,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       ),
                       //血糖検査
                       Padding(
-                        padding: const EdgeInsets.only(top: 15.0,bottom: 2.5),
+                        padding: const EdgeInsets.only(top: 15.0, bottom: 2.5),
                         child: Row(
                           children: <Widget>[
                             Expanded(
@@ -773,9 +753,9 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                         // ignore: deprecated_member_use
                         child: ElevatedButton(
                           style: const ButtonStyle(
-                            /* color: Theme.of(context).primaryColorDark,
+                              /* color: Theme.of(context).primaryColorDark,
                             textColor: Theme.of(context).primaryColorLight,*/
-                          ),
+                              ),
                           child: const Text(
                             'Delete',
                             textScaleFactor: 1.5,
@@ -946,7 +926,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
         lastDate: DateTime.now().add(const Duration(days: 720)));
     if (selected != null) {
       setState(
-            () => dateNow = DateFormat("yyyy年MM月dd日").format(selected).toString(),
+        () => dateNow = DateFormat("yyyy年MM月dd日").format(selected).toString(),
       );
       debugPrint('$dateNow');
       //note.on_the_day = onTheDayController.text;

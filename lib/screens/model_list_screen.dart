@@ -32,7 +32,7 @@ class ModelListScreenState extends State<ModelListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MY HEALTHCARE DATA'),
+        title: const Text('ヘルスケア マニア'),
       ),
       body: getModelListView(),
       floatingActionButton: FloatingActionButton(
