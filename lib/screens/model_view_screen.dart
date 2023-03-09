@@ -7,7 +7,9 @@ import 'package:intl/intl.dart';
 class ModelViewScreen extends StatefulWidget {
   final String appBarTitle;
   final Model model;
-  const ModelViewScreen({Key key, this.appBarTitle, this.model}) : super(key:key);
+  const ModelViewScreen(
+      {Key? key, required this.appBarTitle, required this.model})
+      : super(key: key);
 
   @override
   State<ModelViewScreen> createState() => _ModelViewScreenState();
@@ -26,7 +28,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
     dateFormat = DateTime.now();
     dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);
   }
-
 
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
@@ -54,10 +55,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = Theme
-        .of(context)
-        .textTheme
-        .subtitle1;
+    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
 
     heightController.text = widget.model.height_1;
     weightController.text = widget.model.weight_2;
@@ -83,8 +81,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
     hA1cController.text = widget.model.hA1c_22;
     eCgController.text = widget.model.ecg_23;
     if (onTheDayController.text == null) {
-      onTheDayController.text =
-          DateFormat("yyyy年MM月dd日").format(dateFormat);
+      onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
       if (kDebugMode) {
         print('$dateFormat');
       }
@@ -95,10 +92,9 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
           FocusScopeNode currentFocus = FocusScope.of(context);
           if (!currentFocus.hasPrimaryFocus &&
               currentFocus.focusedChild != null) {
-            currentFocus.focusedChild.unfocus();
+            currentFocus.focusedChild?.unfocus();
           }
         },
-
         child: Scaffold(
           appBar: AppBar(
             title: Text(widget.appBarTitle),
@@ -131,8 +127,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                       );
                     }).toList(),
                     style: textStyle,
-                    value: getPriorityAsString(widget.model.priority),
-                    onChanged: (String value) {},
+                    value: getPriorityAsString(widget.model.priority), onChanged: (String? value) {  },
                   ),
                 ),
                 // 24 Element　受診日
@@ -183,7 +178,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                     style: textStyle,
                     textAlign: TextAlign.right,
                     enabled: false,
-
                     decoration: InputDecoration(
                         labelText: '体重',
                         labelStyle: textStyle,
@@ -205,7 +199,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           controller: rEyeController,
                           style: textStyle,
                           enabled: false,
-
                           decoration: InputDecoration(
                             labelText: '右視力',
                             icon: const Icon(Icons.remove_red_eye),
@@ -224,7 +217,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           controller: lEyeController,
                           style: textStyle,
                           enabled: false,
-
                           decoration: InputDecoration(
                             labelText: '左視力',
                             icon: const Icon(Icons.remove_red_eye),
@@ -250,7 +242,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           controller: hR1000Controller,
                           style: textStyle,
                           enabled: false,
-
                           decoration: InputDecoration(
                             labelText: '右聴力1000',
                             labelStyle: textStyle,
@@ -269,7 +260,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           controller: hL1000Controller,
                           style: textStyle,
                           enabled: false,
-
                           decoration: InputDecoration(
                             labelText: '左聴力1000',
                             labelStyle: textStyle,
@@ -295,7 +285,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           controller: hR4000Controller,
                           style: textStyle,
                           enabled: false,
-
                           decoration: InputDecoration(
                             labelText: '右聴力4000',
                             icon: const Icon(Icons.hearing),
@@ -314,7 +303,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           controller: hL4000Controller,
                           style: textStyle,
                           enabled: false,
-
                           decoration: InputDecoration(
                             labelText: '左聴力4000',
                             labelStyle: textStyle,
@@ -340,7 +328,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           style: textStyle,
                           enabled: false,
                           textAlign: TextAlign.right,
-
                           decoration: InputDecoration(
                               labelText: '血圧Low',
                               labelStyle: textStyle,
@@ -382,7 +369,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                     controller: xRayController,
                     style: textStyle,
                     enabled: false,
-
                     decoration: InputDecoration(
                         labelText: 'レントゲン検査所見',
                         icon: const Icon(Icons.content_paste),
@@ -435,14 +421,13 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                     labelText: '赤血球数',
                                     labelStyle: textStyle,
                                     suffix: const Text(' 万/μL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -455,14 +440,13 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                     labelText: '血色素量',
                                     labelStyle: textStyle,
                                     suffix: const Text(' g/dL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                           ],
@@ -481,14 +465,13 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                     labelText: 'ＧＯＴ',
                                     labelStyle: textStyle,
                                     suffix: const Text(' U/L'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -501,14 +484,13 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                     labelText: 'ＧＰＴ',
                                     labelStyle: textStyle,
                                     suffix: const Text(' U/L'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -521,14 +503,13 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                     labelText: 'ガンマGPT',
                                     labelStyle: textStyle,
                                     suffix: const Text(' U/L'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                           ],
@@ -546,14 +527,13 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                     labelText: 'ＬＤＬ',
                                     labelStyle: textStyle,
                                     suffix: const Text(' mg/dL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -565,14 +545,13 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 controller: hDlController,
                                 style: textStyle,
                                 enabled: false,
-
                                 decoration: InputDecoration(
                                     labelText: 'ＨＤＬ',
                                     labelStyle: textStyle,
                                     suffix: const Text(' mg/dL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                             Container(
@@ -585,14 +564,13 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                     labelText: '中性脂肪',
                                     labelStyle: textStyle,
                                     suffix: const Text(' mg/dL'),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0))),
+                                            BorderRadius.circular(5.0))),
                               ),
                             ),
                           ],
@@ -610,7 +588,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                   labelText: '空腹時血糖',
                                   labelStyle: textStyle,
@@ -630,7 +607,6 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                                 style: textStyle,
                                 enabled: false,
                                 textAlign: TextAlign.right,
-
                                 decoration: InputDecoration(
                                   labelText: 'hA1c',
                                   labelStyle: textStyle,
@@ -673,7 +649,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
 
   // Convert int priority to String priority and display it to user in DropDown
   String getPriorityAsString(int value) {
-    String priority;
+    String priority = "";
     switch (value) {
       case 1:
         priority = _priorities[0]; // 'High'
@@ -687,6 +663,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
     return priority;
   }
 }
+
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;

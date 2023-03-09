@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class ModelDetailScreen extends StatefulWidget {
   final String appBarTitle;
   final Model model;
-  const ModelDetailScreen({Key key, this.appBarTitle, this.model})
+  const ModelDetailScreen({Key? key, required this.appBarTitle, required this.model})
       : super(key: key);
 
   @override
@@ -55,7 +55,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = Theme.of(context).textTheme.subtitle1;
+    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
 
     heightController.text = widget.model.height_1;
     weightController.text = widget.model.weight_2;
@@ -92,7 +92,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
           FocusScopeNode currentFocus = FocusScope.of(context);
           if (!currentFocus.hasPrimaryFocus &&
               currentFocus.focusedChild != null) {
-            currentFocus.focusedChild.unfocus();
+            currentFocus.focusedChild?.unfocus();
           }
         },
         child: Scaffold(
@@ -798,7 +798,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
 
   // Convert int priority to String priority and display it to user in DropDown
   String getPriorityAsString(int value) {
-    String priority;
+    String priority= "";
     switch (value) {
       case 1:
         priority = _priorities[0]; // 'High'
@@ -918,7 +918,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime selected = await showDatePicker(
+    final DateTime? selected = await showDatePicker(
         locale: const Locale("ja"),
         context: context,
         initialDate: DateTime.now(),

@@ -9,7 +9,7 @@ import 'package:healthcare_mania_legacy_new/utils/database_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ModelListScreen extends StatefulWidget {
-  const ModelListScreen({Key key}) : super(key: key);
+  const ModelListScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -19,7 +19,7 @@ class ModelListScreen extends StatefulWidget {
 
 class ModelListScreenState extends State<ModelListScreen> {
   DatabaseHelper databaseHelper = DatabaseHelper();
-  List<Model> modelList;
+  List<Model>? modelList;
   int count = 0;
 
   @override
@@ -58,23 +58,23 @@ class ModelListScreenState extends State<ModelListScreen> {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor:
-              getPriorityColor(modelList[position].priority),
-              child: getPriorityIcon(modelList[position].priority),
+              getPriorityColor(modelList![position].priority),
+              child: getPriorityIcon(modelList![position].priority),
             ),
-            title: Text('受診日 : ${modelList[position].on_the_day_24}'),
-            subtitle: Text('更新日${modelList[position].date}'),
+            title: Text('受診日 : ${modelList![position].on_the_day_24}'),
+            subtitle: Text('更新日${modelList![position].date}'),
             trailing: GestureDetector(
               child: IconButton(
 
                 icon:const Icon(Icons.account_balance_wallet),
                 color: Colors.grey,
                 onPressed: () {
-                  navigateToDetail(modelList[position], '訂正');
+                  navigateToDetail(modelList![position], '訂正');
                 },),
             ),
             onTap: () {
               debugPrint("ListTile Tapped");
-              navigateToView(modelList[position], '参照');
+              navigateToView(modelList![position], '参照');
 
             },
           ),
@@ -89,14 +89,11 @@ class ModelListScreenState extends State<ModelListScreen> {
       case 1:
       //type = "定期健康診断";
         return Colors.green;
-        break;
       case 2:
       //type = "人間ドック";
         return Colors.blue;
-        break;
       case 3:
         return Colors.yellow;
-        break;
 
       default:
         return Colors.amber;
@@ -108,10 +105,8 @@ class ModelListScreenState extends State<ModelListScreen> {
     switch (priority) {
       case 1:
         return const Icon(Icons.play_arrow);
-        break;
       case 2:
         return const Icon(Icons.keyboard_double_arrow_right);
-        break;
       case 3:
         return const Icon(Icons.keyboard_double_arrow_right);
 

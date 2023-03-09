@@ -5,8 +5,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static DatabaseHelper _databaseHelper; // Singleton DatabaseHelper
-  static Database _database; // Singleton Database
+  static DatabaseHelper? _databaseHelper; // Singleton DatabaseHelper
+  static Database? _database; // Singleton Database
 
   String modelTable = 'model_table';
   String colId = 'id';
@@ -56,12 +56,12 @@ class DatabaseHelper {
 
   factory DatabaseHelper() {
     _databaseHelper ??= DatabaseHelper._createInstance();
-    return _databaseHelper;
+    return _databaseHelper!;
   }
 
   Future<Database> get database async {
     _database ??= await initializeDatabase();
-    return _database;
+    return _database!;
   }
 
   Future<Database> initializeDatabase() async {
@@ -124,11 +124,11 @@ class DatabaseHelper {
   }
 
   // Get number of Note objects in database
-  Future<int> getCount() async {
+  Future<int?> getCount() async {
     Database db = await database;
     List<Map<String, dynamic>> x =
     await db.rawQuery('SELECT COUNT (*) from $modelTable');
-    int result = Sqflite.firstIntValue(x);
+    int? result = Sqflite.firstIntValue(x);
     return result;
   }
 
