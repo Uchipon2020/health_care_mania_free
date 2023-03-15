@@ -38,7 +38,7 @@ class ModelListScreenState extends State<ModelListScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB clicked');
-          navigateToDetail(Model(1,''), '新規登録');
+          navigateToDetail(Model(1,'',"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""), '新規登録');
         },
         tooltip: '新規登録',
         child: const Icon(Icons.add),
