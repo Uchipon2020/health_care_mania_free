@@ -18,7 +18,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   DatabaseHelper helper = DatabaseHelper();
   dynamic dateNow;
   dynamic dateFormat;
-
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController rEyeController = TextEditingController();
@@ -77,11 +76,12 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
+    if (onTheDayController.text == null) {
       onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
       if (kDebugMode) {
         print('$dateFormat');
       }
-
+    }
     return  Scaffold(
           appBar: AppBar(
             title: Text(widget.appBarTitle),
@@ -109,7 +109,11 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     }).toList(),
                     style: textStyle,
                     value: getPriorityAsString(widget.model.priority),
-                    onChanged: (String? value) {  },
+                    onChanged: (String? value) {
+                      setState(() {
+                        updatePriorityAsInt(value!);
+                      });
+                    },
                   ),
                 ),
                 // 24 Element　受診日
@@ -908,8 +912,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
       _showAlertDialog('状況', '削除データなし');
       return;
     }
-
-    // Case 2: User is trying to delete the old note that already has a valid ID.
     int result = await helper.deleteModel(widget.model.id!);
     if (result != 0) {
       _showAlertDialog('状況', 'データ削除完了');
