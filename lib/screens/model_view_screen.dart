@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:healthcare_mania_legacy_new/models/model.dart';
-import 'package:healthcare_mania_legacy_new/utils/database_helper.dart';
 import 'package:intl/intl.dart';
+
+import '../models/model.dart';
+import '../utils/database_helper.dart';
 
 class ModelViewScreen extends StatefulWidget {
   final String appBarTitle;
@@ -17,17 +18,9 @@ class ModelViewScreen extends StatefulWidget {
 
 class _ModelViewScreenState extends State<ModelViewScreen> {
   static final _priorities = ['定期健康診断', '人間ドック', '独自検査'];
-
   DatabaseHelper helper = DatabaseHelper();
   dynamic dateNow;
   dynamic dateFormat;
-
-  @override
-  void initState() {
-    super.initState();
-    dateFormat = DateTime.now();
-    dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);
-  }
 
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
@@ -54,9 +47,10 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
   TextEditingController eCgController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
-
+  void initState() {
+    super.initState();
+    dateFormat = DateTime.now();
+    dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);
     heightController.text = widget.model.height_1;
     weightController.text = widget.model.weight_2;
     rEyeController.text = widget.model.right_eye_4;
@@ -80,6 +74,11 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
     bGluController.text = widget.model.blood_glucose_21;
     hA1cController.text = widget.model.hA1c_22;
     eCgController.text = widget.model.ecg_23;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
     if (onTheDayController.text == null) {
       onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
       if (kDebugMode) {
@@ -87,15 +86,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
       }
     }
 
-    return Listener(
-        onPointerDown: (_) {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus &&
-              currentFocus.focusedChild != null) {
-            currentFocus.focusedChild?.unfocus();
-          }
-        },
-        child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: Text(widget.appBarTitle),
             leading: IconButton(
@@ -127,9 +118,9 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                       );
                     }).toList(),
                     style: textStyle,
-                    value: getPriorityAsString(widget.model.priority), onChanged: (String? value) {  },
-                  ),
-                ),
+                    value: getPriorityAsString(widget.model.priority),
+                    onChanged: (String? value) {
+                    }),),
                 // 24 Element　受診日
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
@@ -625,7 +616,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
               ],
             ),
           ),
-        ));
+        );
   }
 
   void moveToLastScreen() {

@@ -1,33 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:healthcare_mania_legacy_new/models/model.dart';
-import 'package:healthcare_mania_legacy_new/utils/database_helper.dart';
 import 'package:intl/intl.dart';
+import '../models/model.dart';
+import '../utils/database_helper.dart';
 
 class ModelDetailScreen extends StatefulWidget {
   final String appBarTitle;
   final Model model;
   const ModelDetailScreen({Key? key, required this.appBarTitle, required this.model})
       : super(key: key);
-
   @override
   State<ModelDetailScreen> createState() => _ModelDetailScreenState();
 }
 
 class _ModelDetailScreenState extends State<ModelDetailScreen> {
   static final _priorities = ['定期健康診断', '人間ドック', '独自検査'];
-
   DatabaseHelper helper = DatabaseHelper();
-
   dynamic dateNow;
   dynamic dateFormat;
-
-  @override
-  void initState() {
-    super.initState();
-    dateFormat = DateTime.now();
-    dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);
-  }
 
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
@@ -54,8 +44,10 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   TextEditingController eCgController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
+  void initState() {
+    super.initState();
+    dateFormat = DateTime.now();
+    dateNow = DateFormat("yyyy年MM月dd日").format(dateFormat);
 
     heightController.text = widget.model.height_1;
     weightController.text = widget.model.weight_2;
@@ -80,43 +72,46 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     bGluController.text = widget.model.blood_glucose_21;
     hA1cController.text = widget.model.hA1c_22;
     eCgController.text = widget.model.ecg_23;
-    if (onTheDayController.text == null) {
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
       onTheDayController.text = DateFormat("yyyy年MM月dd日").format(dateFormat);
       if (kDebugMode) {
         print('$dateFormat');
       }
-    }
 
-    return Listener(
-        onPointerDown: (_) {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus &&
-              currentFocus.focusedChild != null) {
-            currentFocus.focusedChild?.unfocus();
-          }
-        },
-        child: Scaffold(
+    return  Scaffold(
           appBar: AppBar(
             title: Text(widget.appBarTitle),
-            leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  // Write some code to control things, when user press back button in AppBar
-                  moveToLastScreen();
-                }),
+            automaticallyImplyLeading: true,
           ),
           body: Padding(
             padding: const EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
             child: ListView(
               children: <Widget>[
-                // First element　定期健康診断か人間ドックかプルダウンで選ぶ
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('      健康診断',
-                    style: TextStyle(
-                      fontSize: 20.5,
-                    ),),
+                ListTile(
+                  title: DropdownButton(
+                    items: _priorities.map((String dropDownStringItem) {
+                      return DropdownMenuItem<String>(
+                        value: dropDownStringItem,
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 20.0),
+                          child: Text(
+                            dropDownStringItem,
+                            style: const TextStyle(
+                              fontSize: 20.5,
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    style: textStyle,
+                    value: getPriorityAsString(widget.model.priority),
+                    onChanged: (String? value) {  },
                   ),
+                ),
                 // 24 Element　受診日
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
@@ -145,7 +140,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       icon: const Icon(Icons.calendar_today_outlined),
                     ),
                   ),
-                  //Text("$dateNow"),
                 ),
                 // Second Element　身長入力
                 Padding(
@@ -168,7 +162,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
-
                 // Third Element　体重入力
                 Padding(
                   padding: const EdgeInsets.only(top: 2.5, bottom: 10.0),
@@ -190,7 +183,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
-
                 //視力横並び表示-------------------
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
@@ -242,9 +234,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     ],
                   ),
                 ),
-
                 //聴力1000Hz
-
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 2.5),
                   child: Row(
@@ -260,7 +250,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                                 'Something changed in Description Text Field');
                             updateHearing_r_1000();
                           },
-
                           decoration: InputDecoration(
                             labelText: '右聴力1000',
                             labelStyle: textStyle,
@@ -296,9 +285,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     ],
                   ),
                 ),
-
                 //聴力4000Hz
-
                 Padding(
                   padding: const EdgeInsets.only(top: 2.5, bottom: 10.0),
                   child: Row(
@@ -350,7 +337,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     ],
                   ),
                 ),
-
                 //血圧横並び表示----------------
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -404,7 +390,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     ],
                   ),
                 ),
-
                 // x線検査
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -443,7 +428,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
-
                 /*コンテナ＋Columnで血液検査をまとめる。
                 //赤血球数・血色素量----------------
                  -----------------------------------------------------------------------------------------------------
@@ -451,7 +435,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                  */
                 Container(
                   //margin: EdgeInsets.all(1.0),
-
                   padding: const EdgeInsets.all(7.0),
                   decoration: BoxDecoration(
                       color: const Color(0xFFFCE4EC),
@@ -722,7 +705,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     ],
                   ),
                 ),
-
                 /* 5 Element　保存と削除　横並び表示
                ---------------------------------------------- */
                 Padding(
@@ -774,14 +756,12 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
               ],
             ),
           ),
-        ));
+        );
   }
 
   void moveToLastScreen() {
     Navigator.pop(context, true);
   }
-
-  // Convert the String priority in the form of integer before saving it to Database
   void updatePriorityAsInt(String value) {
     switch (value) {
       case '定期健康診断':
@@ -795,8 +775,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
         break;
     }
   }
-
-  // Convert int priority to String priority and display it to user in DropDown
   String getPriorityAsString(int value) {
     String priority= "";
     switch (value) {
@@ -811,102 +789,72 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     }
     return priority;
   }
-
-  // Update the title of Note object
   void updateHeight() {
     widget.model.height_1 = heightController.text;
   }
-
-  // Update the title of Note object
   void updateWeight() {
     widget.model.weight_2 = weightController.text;
   }
-
-  // Update the right_eyes of Note object
   void updateREye() {
     widget.model.right_eye_4 = rEyeController.text;
   }
-
-  // Update the left_eyes of Note object
   void updateLEye() {
     widget.model.left_eye_5 = lEyeController.text;
   }
-
   void updateHearing_r_1000() {
     widget.model.hearing_right_1000_6 = hR1000Controller.text;
   }
-
   void updateHearing_l_1000() {
     widget.model.hearing_left_1000_7 = hL1000Controller.text;
   }
-
   void updateHearing_r_4000() {
     widget.model.hearing_right_4000_8 = hR4000Controller.text;
   }
-
   void updateHearing_l_4000() {
     widget.model.hearing_left_4000_9 = hL4000Controller.text;
   }
-
   void updateXray() {
     widget.model.x_ray_10 = xRayController.text;
   }
-
   void updateRedblood() {
     widget.model.red_blood_13 = rBController.text;
   }
-
   void updateHemo() {
     widget.model.hemoglobin_14 = hEmoController.text;
   }
-
   void updateGot() {
     widget.model.got_15 = gOtController.text;
   }
-
   void updateGpt() {
     widget.model.gpt_16 = gPtController.text;
   }
-
   void updateGtp() {
     widget.model.gtp_17 = gTpController.text;
   }
-
   void updateLdl() {
     widget.model.ldl_18 = lDlController.text;
   }
-
   void updateHdl() {
     widget.model.hdl_19 = hDlController.text;
   }
-
   void updateNeutralfat() {
     widget.model.neutral_fat_20 = nFatController.text;
   }
-
   void updateBloodglucose() {
     widget.model.blood_glucose_21 = bGluController.text;
   }
-
   void updateHA1c() {
     widget.model.hA1c_22 = hA1cController.text;
   }
-
   void updateEcg() {
     widget.model.ecg_23 = eCgController.text;
   }
-
-  // Update the low_blood_pressure of Note object
   void updateLBp() {
     widget.model.low_blood_pressure_11 = lBpController.text;
   }
-
-  // Update the high_blood_pressure of Note object
   void updateHBp() {
     widget.model.high_blood_pressure_12 = hBpController.text;
   }
-
-  // Update the on_the_day of Note object
   void updateOTD() {
     widget.model.on_the_day_24 = onTheDayController.text;
     if (kDebugMode) {
@@ -935,7 +883,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     }
   }
 
-  // Save data to database
   void _save() async {
     moveToLastScreen();
 
@@ -943,10 +890,8 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     debugPrint(widget.model.on_the_day_24);
     int result;
     if (widget.model.id != null) {
-      // Case 1: Update operation
       result = await helper.updateModel(widget.model);
     } else {
-      // Case 2: Insert Operation
       result = await helper.insertModel(widget.model);
     }
 
@@ -958,24 +903,20 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
       _showAlertDialog('状況', '問題発生・保存されませんでした');
     }
   }
-
   void _delete() async {
-    // Case 1: If user is trying to delete the NEW NOTE i.e. he has come to
-    // the detail page by pressing the FAB of NoteList page.
     if (widget.model.id == null) {
       _showAlertDialog('状況', '削除データなし');
       return;
     }
 
     // Case 2: User is trying to delete the old note that already has a valid ID.
-    int result = await helper.deleteModel(widget.model.id);
+    int result = await helper.deleteModel(widget.model.id!);
     if (result != 0) {
       _showAlertDialog('状況', 'データ削除完了');
     } else {
       _showAlertDialog('状況', '問題発生・データ削除不可');
     }
   }
-
   void _showAlertDialog(String title, String message) {
     AlertDialog alertDialog = AlertDialog(
       title: Text(title),
@@ -984,7 +925,6 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     showDialog(context: context, builder: (_) => alertDialog);
   }
 }
-
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;

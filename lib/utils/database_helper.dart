@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:healthcare_mania_legacy_new/models/model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import '../models/model.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper; // Singleton DatabaseHelper
@@ -40,6 +40,26 @@ class DatabaseHelper {
 
   //Ver2追加
   String colWaist = 'waist';
+  String colCorrectedEyeR = 'correctedEyesight_right'; //矯正視力右
+  String colCorrectedEyeL = 'correctedEyesight_left'; //矯正視力左
+  String colLatenBlood = 'latenBlood'; //潜血
+  String colBloodInTheStool = 'bloodInTheStool'; //便潜血
+  String colTotalProtein = 'totalProtein'; //総蛋白
+  String colAlbumin = 'albumin'; //アルブミ
+  String colTotalBilirubin = 'totalBilirubin'; //総ビリルビン
+  String colAlp = 'alp'; //ALP
+  String colTotalCholesterol = 'totalCholesterol'; //総コレステロール
+  String colUricAcid = 'uricAcid'; //尿酸
+  String colReaNitrogen = 'ureaNitrogen'; //尿素窒素
+  String colCreatinine = 'creatinine'; //クレアチニン
+  String colAmylase = 'amylase'; //アミラーゼ
+  String colWhiteBloodCell ='whiteBloodCell'; //白血球数
+  String colHematocrit = 'hematocrit';
+  String colMcv = 'mcv';
+  String colMch = 'mch';
+  String colMchc = 'mchc';
+  String colSerumIron = 'serumIron';
+  String colPlatelet = 'platelet';
 
   DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
 
@@ -56,10 +76,11 @@ class DatabaseHelper {
   Future<Database> initializeDatabase() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = '${directory.path}models.db';
-
-    // Open/create the database at a given path
-    var modelsDatabase = await openDatabase(path,
-        version: 2, onCreate: _createDb);// ,onUpgrade: _upgradeDB);
+    var modelsDatabase = await openDatabase(
+        path,
+        version: 3,
+        onCreate: _createDb,
+        onUpgrade: _upgradeDB);
     return modelsDatabase;
   }
 
@@ -78,36 +99,42 @@ class DatabaseHelper {
         ' $colOnTheDay TEXT, $colPriority INTEGER, $colDate TEXT)');
   }
 
-  /*void _upgradeDB(Database db, int oldVersion, int newVersion) async {
+  void _upgradeDB(Database db, int oldVersion, int newVersion) async {
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colWaist TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBpHeight ');
-  }*/
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeR TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colCorrectedEyeL TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colLatenBlood TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colBloodInTheStool TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalProtein TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAlbumin TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalBilirubin TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAlp TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalCholesterol TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colUricAcid TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colReaNitrogen TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colCreatinine TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAmylase TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colWhiteBloodCell TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colHematocrit TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMcv TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMch TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT');
+  }
 
-  // Fetch Operation: Get all note objects from database
   Future<List<Map<String, dynamic>>> getModelMapList() async {
     Database db = await database;
-
-//		var result = await db.rawQuery('SELECT * FROM $noteTable order by $colPriority ASC');
     var result = await db.query(modelTable, orderBy: '$colPriority ASC');
     return result;
   }
 
-  // Insert Operation: Insert a Note object to database
   Future<int> insertModel(Model models) async {
     Database db = await database;
     var result = await db.insert(modelTable, models.toMap());
     return result;
   }
 
-  // Update Operation: Update a Note object and save it to database
   Future<int> updateModel(Model model) async {
     var db = await database;
     var result = await db.update(modelTable, model.toMap(),
@@ -115,7 +142,6 @@ class DatabaseHelper {
     return result;
   }
 
-  // Delete Operation: Delete a Note object from database
   Future<int> deleteModel(int id) async {
     var db = await database;
     int result =
@@ -123,7 +149,6 @@ class DatabaseHelper {
     return result;
   }
 
-  // Get number of Note objects in database
   Future<int?> getCount() async {
     Database db = await database;
     List<Map<String, dynamic>> x =
@@ -132,18 +157,14 @@ class DatabaseHelper {
     return result;
   }
 
-  // Get the 'Map List' [ List<Map> ] and convert it to 'Note List' [ List<Note> ]
   Future<List<Model>> getModelList() async {
     var modelMapList = await getModelMapList(); // Get 'Map List' from database
     int count =
         modelMapList.length; // Count the number of map entries in db table
-    // ignore: deprecated_member_use
     List<Model> modelList = <Model>[];
-    // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
       modelList.add(Model.fromMapObject(modelMapList[i]));
     }
-
     return modelList;
   }
 }
