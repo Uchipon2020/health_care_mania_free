@@ -120,6 +120,9 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                     style: textStyle,
                     value: getPriorityAsString(widget.model.priority),
                     onChanged: (String? value) {
+                      setState(() {
+                        updatePriorityAsInt(value!);
+                      });
                     }),),
                 // 24 Element　受診日
                 Padding(

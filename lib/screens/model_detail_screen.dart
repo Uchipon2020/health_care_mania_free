@@ -709,13 +709,13 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     ],
                   ),
                 ),
-                /* 5 Element　保存と削除　横並び表示
+                /* 5 Element　削除　横並び表示
                ---------------------------------------------- */
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
                   child: Row(
                     children: <Widget>[
-                      Expanded(
+                     /* Expanded(
                         // ignore: deprecated_member_use
                         child: ElevatedButton(
                           /* color: Theme.of(context).primaryColorDark,
@@ -731,16 +731,15 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             });
                           },
                         ),
-                      ),
-                      Container(
-                        width: 5.0,
-                      ),
+                      ),*/
                       Expanded(
                         // ignore: deprecated_member_use
                         child: ElevatedButton(
-                          style: const ButtonStyle(
-                              /* color: Theme.of(context).primaryColorDark,
-                            textColor: Theme.of(context).primaryColorLight,*/
+                          style: ElevatedButton.styleFrom(
+                             backgroundColor: Colors.deepOrange,
+                            textStyle:const TextStyle(
+                              color: Colors.red
+                            )
                               ),
                           child: const Text(
                             'Delete',
@@ -760,6 +759,16 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
               ],
             ),
           ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          setState(() {
+            _save();
+          });
+        },
+        tooltip: 'save',
+        child:const Icon(Icons.save),
+      ),
+
         );
   }
 
