@@ -41,6 +41,28 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   TextEditingController bGluController = TextEditingController();
   TextEditingController hA1cController = TextEditingController();
   TextEditingController eCgController = TextEditingController();
+  //
+  final waistController = TextEditingController();
+  final correctEyeRController = TextEditingController();
+  final correctEyeLController = TextEditingController();
+  final latentBloodController = TextEditingController();
+  final bloodInTheStoolController = TextEditingController();
+  final totalProteinController = TextEditingController();
+  final albuminController = TextEditingController();
+  final totalBilirubinController = TextEditingController();
+  final alpController = TextEditingController();
+  final totalCholesterolController = TextEditingController();
+  final uricAcidController = TextEditingController();
+  final ureaNitrogenController = TextEditingController();
+  final creatinineController = TextEditingController();
+  final amylaseController = TextEditingController();
+  final whiteBloodCellController = TextEditingController();
+  final hematocritController = TextEditingController();
+  final mcvController = TextEditingController();
+  final mchController = TextEditingController();
+  final mchcController = TextEditingController();
+  final serumIronController = TextEditingController();
+  final plateletController = TextEditingController();
 
   @override
   void initState() {
@@ -71,8 +93,29 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     bGluController.text = widget.model.blood_glucose_21;
     hA1cController.text = widget.model.hA1c_22;
     eCgController.text = widget.model.ecg_23;
+    //
+    waistController.text = widget.model.waist_3;
+    correctEyeRController.text = widget.model.correctedEyesightRight_27;
+    correctEyeLController.text = widget.model.correctedEyesightLeft_28;
+    latentBloodController.text = widget.model.lateBlood_29;
+    bloodInTheStoolController.text = widget.model.bloodInTheStool_30;
+    totalProteinController.text = widget.model.totalProtein_31;
+    albuminController.text = widget.model.albumin_32;
+    totalBilirubinController.text = widget.model.totalBilirubin_33;
+    alpController.text = widget.model.alp_34;
+    totalCholesterolController.text = widget.model.totalCholesterol_35;
+    uricAcidController.text = widget.model.uricAcid_36;
+    ureaNitrogenController.text = widget.model.ureaNitrogen_37;
+    creatinineController.text = widget.model.creatinine_38;
+    amylaseController.text = widget.model.amylase_39;
+    whiteBloodCellController.text = widget.model.whiteBloodCell_40;
+    hematocritController.text = widget.model.hematocrit_41;
+    mcvController.text = widget.model.mcv_42;
+    mchController.text = widget.model.mch_43;
+    mchcController.text = widget.model.mchc_44;
+    serumIronController.text = widget.model.serumIron_45;
+    plateletController.text = widget.model.platelet_46;
   }
-
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.subtitle1;
@@ -187,6 +230,26 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
                 ),
+                //腹囲入力
+                Padding(
+                  padding: const EdgeInsets.only(top: 2.5, bottom: 10.0),
+                  child: TextField(
+                    controller: waistController,
+                    style: textStyle,
+                    textAlign: TextAlign.right,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      updateWaist();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '腹囲',
+                        labelStyle: textStyle,
+                        suffix: const Text(' cm'),
+                        icon: const Icon(Icons.accessibility),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
                 //視力横並び表示-------------------
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
@@ -228,6 +291,56 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                           },
                           decoration: InputDecoration(
                             labelText: '左視力',
+                            icon: const Icon(Icons.remove_red_eye),
+                            labelStyle: textStyle,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        // 3 Element　（右）矯正視力入力
+                        child: TextField(
+                          controller: correctEyeRController,
+                          style: textStyle,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            debugPrint(
+                                'Something changed in Description Text Field');
+                            updateCorrectER();
+                          },
+                          decoration: InputDecoration(
+                            labelText: '矯正(右）',
+                            icon: const Icon(Icons.remove_red_eye),
+                            labelStyle: textStyle,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0)),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 5.0,
+                      ),
+                      Expanded(
+                        // 5 Element　（左）矯正視力入力
+                        child: TextField(
+                          controller: correctEyeLController,
+                          style: textStyle,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            debugPrint(
+                                'Something changed in Description Text Field');
+                            updateCorrectEL();
+                          },
+                          decoration: InputDecoration(
+                            labelText: '矯正（左）',
                             icon: const Icon(Icons.remove_red_eye),
                             labelStyle: textStyle,
                             border: OutlineInputBorder(
@@ -877,6 +990,50 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
       print(widget.model.on_the_day_24);
     }
   }
+  ////
+  void updateWaist(){
+    widget.model.waist_3 = waistController.text;
+  }//26
+  void updateCorrectER(){
+    widget.model.correctedEyesight_right_27 = correctEyeRController.text;
+  }//27
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }//28
+  void updateLatentBlood(){
+    widget.model.latentBlood_29 = latentBloodController.text;
+  }//29
+  void updateBloodIn(){
+    widget.model.bloodInTheStool_30 = bloodInTheStoolController.text;
+  }//30
+  void updateTotalProtein(){
+    widget.model.totalProtein_31 = totalProteinController.text;
+  }//31
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }
+  void updateCorrectEL(){
+    widget.model.correctedEyesight_left_28 = correctEyeLController.text;
+  }
+
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
@@ -917,6 +1074,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     }
   }
   void _delete() async {
+    moveToLastScreen();
     if (widget.model.id == null) {
       _showAlertDialog('状況', '削除データなし');
       return;

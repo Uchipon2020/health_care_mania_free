@@ -197,12 +197,12 @@ class Model {
   String get creatinine_38 => _38_creatinine!; //クレアチニン
   String get amylase_39 => _39_amylase!; //アミラーゼ
   String get whiteBloodCell_40 => _40_whiteBloodCell!; //白血球数
-  String get haematocrit_41 => _41_hematocrit!; //ヘマトクリット
+  String get hematocrit_41 => _41_hematocrit!; //ヘマトクリット
   String get mcv_42 => _42_mcv!;
   String get mch_43 => _43_mch!;
   String get mchc_44 => _44_mchc!;
   String get serumIron_45 => _45_serumIron!; //血清鉄
-  String get platelet => _46_platelet!; //血小板
+  String get platelet_46 => _46_platelet!; //血小板
 
   /////setter aria
   set height_1(String newHeight) {
@@ -343,64 +343,64 @@ class Model {
   set date(String newDate) {
     _date = newDate;
   }
-  set correctedEyesight_left(String value) {
+  set correctedEyesight_left_28 (String value) {
     _28_correctedEyesight_left = value;
   }
-  set latentBlood(String value) {
+  set latentBlood_29(String value) {
     _29_latentBlood = value;
   }
-  set bloodInTheStool(String value) {
+  set bloodInTheStool_30(String value) {
     _30_bloodInTheStool = value;
   }
-  set totalProtein(String value) {
+  set totalProtein_31(String value) {
     _31_totalProtein = value;
   }
-  set albumin(String value) {
+  set albumin_32(String value) {
     _32_albumin = value;
   }
-  set totalBilirubin(String value) {
+  set totalBilirubin_33(String value) {
     _33_totalBilirubin = value;
   }
-  set alp(String value) {
+  set alp_34(String value) {
     _34_alp = value;
   }
-  set totalCholesterol(String value) {
+  set totalCholesterol_35(String value) {
     _35_totalCholesterol = value;
   }
-  set uricAcid(String value) {
+  set uricAcid_36(String value) {
     _36_uricAcid = value;
   }
-  set ureaNitrogen(String value) {
+  set ureaNitrogen_37(String value) {
     _37_ureaNitrogen = value;
   }
-  set creatinine(String value) {
+  set creatinine_38(String value) {
     _38_creatinine = value;
   }
-  set amylase(String value) {
+  set amylase_39(String value) {
     _39_amylase = value;
   }
-  set whiteBloodCell(String value) {
+  set whiteBloodCell_40(String value) {
     _40_whiteBloodCell = value;
   }
-  set hematocrit(String value) {
+  set hematocrit_41(String value) {
     _41_hematocrit = value;
   }
-  set mcv(String value) {
+  set mcv_42(String value) {
     _42_mcv = value;
   }
-  set mch(String value) {
+  set mch_43(String value) {
     _43_mch = value;
   }
-  set mchc(String value) {
+  set mchc_44(String value) {
     _44_mchc = value;
   }
-  set serumIron(String value) {
+  set serumIron_45(String value) {
     _45_serumIron = value;
   }
-  set platelet(String value) {
+  set platelet_46(String value) {
     _46_platelet = value;
   }
-  set correctedEyesight_right(String value) {
+  set correctedEyesight_right_27(String value) {
     _27_correctedEyesight_right = value;
   }
 
