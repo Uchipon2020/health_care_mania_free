@@ -96,7 +96,12 @@ class DatabaseHelper {
         ' $colRedBlood TEXT, $colHemoglobin TEXT,'
         ' $colGot TEXT, $colGpt TEXT, $colGtp TEXT, $colLdl TEXT, $colHdl TEXT, $colNeutralFat TEXT, '
         ' $colBloodGlucose TEXT, $colHA1c TEXT, $colUrine TEXT, $colSugar TEXT, $colEcg TEXT, '
-        ' $colOnTheDay TEXT, $colPriority INTEGER, $colDate TEXT)');
+        ' $colOnTheDay TEXT, $colPriority INTEGER, $colDate TEXT, $colWaist TEXT, $colCorrectedEyeR TEXT'
+        ' $colCorrectedEyeL TEXT, $colLatenBlood TEXT, $colBloodInTheStool TEXT, $colTotalProtein TEXT'
+        ' $colAlbumin TEXT, $colAlbumin TEXT, $colTotalBilirubin TEXT, $colAlp TEXT, $colTotalCholesterol TEXT'//
+        ' $colTotalCholesterol TEXT, $colUricAcid TEXT, $colReaNitrogen TEXT, $colCreatinine TEXT, $colAmylase TEXT'
+        ' $colWhiteBloodCell TEXT, $colWhiteBloodCell TEXT, $colHematocrit TEXT, $colMcv TEXT, $colMch TEXT, $colMchc TEXT'
+        ' $colSerumIron TEXT, $colPlatelet TEXT)');
   }
 
   void _upgradeDB(Database db, int oldVersion, int newVersion) async {
@@ -109,7 +114,7 @@ class DatabaseHelper {
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAlbumin TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalBilirubin TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colAlp TEXT');
-    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalCholesterol TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colTotalCholesterol TEXT');//
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colUricAcid TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colReaNitrogen TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colCreatinine TEXT');
