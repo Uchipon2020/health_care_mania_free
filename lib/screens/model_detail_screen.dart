@@ -42,6 +42,8 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   TextEditingController bGluController = TextEditingController();
   TextEditingController hA1cController = TextEditingController();
   TextEditingController eCgController = TextEditingController();
+  TextEditingController sugarController = TextEditingController();
+  TextEditingController urineController = TextEditingController();
   //
   final waistController = TextEditingController();
   final correctEyeRController = TextEditingController();
@@ -547,671 +549,676 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                         borderRadius: BorderRadius.circular(5.0))),
               ),
             ),
-
-            //　追加項目-------------
-            //潜血
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller:latentBloodController,
-                style: textStyle,
-                //keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateLatentBlood();
-                },
-                decoration: InputDecoration(
-                    labelText: '尿潜血',
-                    labelStyle: textStyle,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
+            //　血液検査関係-------------
+            //血清蛋白-----------------------------------------
+            ExpansionTile(
+              title: const Text('血清蛋白'),
+              children: [
+                //総蛋白
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: totalBilirubinController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateTotalBilirubin();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '総蛋白',
+                        labelStyle: textStyle,
+                        suffix: const Text(' g/dL'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                //アルブミン
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: albuminController,
+                      style: textStyle,
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        debugPrint('Something changed in Title Text Field');
+                        updateAlbumin();
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'アルブミン',
+                          suffix: const Text(' g/dL'),
+                          labelStyle: textStyle,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
+                    )),
+              ],
             ),
-            //便潜血
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: bloodInTheStoolController,
-                style: textStyle,
-                //keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateBloodIn();
-                },
-                decoration: InputDecoration(
-                    labelText: '便潜血',
-                    labelStyle: textStyle,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
+            //肝機能----------------------------------------------
+            ExpansionTile(
+              title: const Text('肝機能'),
+              children: [
+                //総ビリルビン
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: totalBilirubinController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateEcg();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '総ビリルビン',
+                        suffix: const Text(' mg/dL'),
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                // ＧＯＴ
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: gOtController,
+                    style: textStyle,
+                    textAlign: TextAlign.right,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Description Text Field');
+                      updateGot();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'ＧＯＴ',
+                        labelStyle: textStyle,
+                        suffix: const Text(' U/L'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                // ＧＰＴ
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: gPtController,
+                    style: textStyle,
+                    textAlign: TextAlign.right,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Description Text Field');
+                      updateGpt();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'ＧＰＴ',
+                        labelStyle: textStyle,
+                        suffix: const Text(' U/L'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                //ALP
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: alpController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateEcg();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'ALP',
+                        labelStyle: textStyle,
+                        suffix: const Text(' U/L'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                // ガンマ
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: gTpController,
+                    style: textStyle,
+                    textAlign: TextAlign.right,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Description Text Field');
+                      updateGtp();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'ガンマGPT',
+                        labelStyle: textStyle,
+                        suffix: const Text(' U/L'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+              ],
             ),
-            //総蛋白
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: totalBilirubinController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateTotalBilirubin();
-                },
-                decoration: InputDecoration(
-                    labelText: '総蛋白',
-                    labelStyle: textStyle,
-                    suffix: const Text(' g/dL'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //アルブミン
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: albuminController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateAlbumin();
-                },
-                decoration: InputDecoration(
-                    labelText: 'アルブミン',
-                    suffix: const Text(' g/dL'),
-                    labelStyle: textStyle,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //総ビリルビン
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: totalBilirubinController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateEcg();
-                },
-                decoration: InputDecoration(
-                    labelText: '総ビリルビン',
-                    suffix: const Text(' mg/dL'),
-                    labelStyle: textStyle,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //ALP
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: alpController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateEcg();
-                },
-                decoration: InputDecoration(
-                    labelText: 'ALP',
-                    labelStyle: textStyle,
-                    suffix: const Text(' U/L'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
+            //脂質--------------------------------------
             //総コレステロール
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: totalCholesterolController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateTotalCholesterol();
-                },
-                decoration: InputDecoration(
-                    labelText: '総コレステロール',
-                    labelStyle: textStyle,
-                    suffix: const Text(' mg/dL'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
+            ExpansionTile(title: const Text('脂質'),
+                children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: totalCholesterolController,
+                  style: textStyle,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Title Text Field');
+                    updateTotalCholesterol();
+                  },
+                  decoration: InputDecoration(
+                      labelText: '総コレステロール',
+                      labelStyle: textStyle,
+                      suffix: const Text(' mg/dL'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                ),
               ),
-            ),
+              // LDL
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: lDlController,
+                  style: textStyle,
+                  textAlign: TextAlign.right,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Description Text Field');
+                    updateLdl();
+                  },
+                  decoration: InputDecoration(
+                      labelText: 'ＬＤＬ',
+                      labelStyle: textStyle,
+                      suffix: const Text(' mg/dL'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                ),
+              ),
+              // ＨＤＬ
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: hDlController,
+                  style: textStyle,
+                  textAlign: TextAlign.right,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Description Text Field');
+                    updateHdl();
+                  },
+                  decoration: InputDecoration(
+                      labelText: 'ＨＤＬ',
+                      labelStyle: textStyle,
+                      suffix: const Text(' mg/dL'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                ),
+              ),
+              // 中性脂肪
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: nFatController,
+                  style: textStyle,
+                  textAlign: TextAlign.right,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Description Text Field');
+                    updateNeutralfat();
+                  },
+                  decoration: InputDecoration(
+                      labelText: '中性脂肪',
+                      labelStyle: textStyle,
+                      suffix: const Text(' mg/dL'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                ),
+              ),
+            ]),
             //尿酸
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: uricAcidController,
-                style: textStyle,
-                //keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateUricAcid();
-                },
-                decoration: InputDecoration(
-                    labelText: '尿酸',
-                    labelStyle: textStyle,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
+            ExpansionTile(
+              title: const Text('尿酸'),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  child: TextField(
+                    controller: uricAcidController,
+                    style: textStyle,
+                    //keyboardType:TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateUricAcid();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '尿酸',
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                const Text(''),
+              ],
             ),
-            //尿素窒素
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: ureaNitrogenController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateUreaNitrogen();
-                },
-                decoration: InputDecoration(
-                    labelText: '尿素窒素',
-                    labelStyle: textStyle,
-                    suffix: const Text(' mg/dL'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //クレアチニン
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: creatinineController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateEcg();
-                },
-                decoration: InputDecoration(
-                    labelText: 'クレアチニン',
-                    labelStyle: textStyle,
-                    suffix: const Text(' mg/dL'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //アミラーゼ
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: amylaseController,
-                style: textStyle,
-                //keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateEcg();
-                },
-                decoration: InputDecoration(
-                    labelText: 'アミラーゼ',
-                    labelStyle: textStyle,
-                    suffix: const Text(' U/L'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //白血球数
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: whiteBloodCellController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateWhiteBloodCell();
-                },
-                decoration: InputDecoration(
-                    labelText: '白血球',
-                    labelStyle: textStyle,
-                    suffix: const Text(' /μL'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //ヘマトクリット
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: hematocritController,
-                style: textStyle,
-                //keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateHematocrit();
-                },
-                decoration: InputDecoration(
-                    labelText: 'ヘマトクリット',
-                    suffix: const Text(' %'),
-                    labelStyle: textStyle,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //MCV
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: mcvController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateEcg();
-                },
-                decoration: InputDecoration(
-                    labelText: 'MCV',
-                    suffix: const Text(' fL'),
-                    labelStyle: textStyle,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //MCH
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: mcvController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateEcg();
-                },
-                decoration: InputDecoration(
-                    labelText: 'MCV',
-                    labelStyle: textStyle,
-                    suffix: const Text(' fL'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //MCHC
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: mchcController,
-                style: textStyle,
-                //keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateMchc();
-                },
-                decoration: InputDecoration(
-                    labelText: 'MCHC',
-                    labelStyle: textStyle,
-                    suffix: const Text(' %'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //serumIron
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: serumIronController,
-                style: textStyle,
-                keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updateEcg();
-                },
-                decoration: InputDecoration(
-                    labelText: '血清鉄',
-                    labelStyle: textStyle,
-                    suffix: const Text('μg/dL'),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-            //platelet
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-              child: TextField(
-                controller: plateletController,
-                style: textStyle,
-                //keyboardType:TextInputType.number,
-                onChanged: (value) {
-                  debugPrint('Something changed in Title Text Field');
-                  updatePlatelet();
-                },
-                decoration: InputDecoration(
-                    labelText: '血小板数',
-                    suffix: const Text(' 万/'),
-                    labelStyle: textStyle,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-              ),
-            ),
-
-            /*コンテナ＋Columnで血液検査をまとめる。
-                //赤血球数・血色素量----------------
-                 -----------------------------------------------------------------------------------------------------
-                 -----------------------------------------------------------------------------------------------------
-                 */
-            Container(
-              //margin: EdgeInsets.all(1.0),
-              padding: const EdgeInsets.all(7.0),
-              decoration: BoxDecoration(
-                  color: const Color(0xFFFCE4EC),
-                  borderRadius: BorderRadius.circular(5.0)),
-
-              child: Column(
+            //尿素窒素 //腎機能-------------------------------------
+            ExpansionTile(title: const Text('腎機能'),
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          // 6 Element　赤血球数
-                          child: TextField(
-                            controller: rBController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateRedblood();
-                            },
-                            decoration: InputDecoration(
-                                labelText: '赤血球数',
-                                labelStyle: textStyle,
-                                suffix: const Text(' 万/μL'),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
-                        ),
-                        Container(
-                          width: 5.0,
-                        ),
-                        Expanded(
-                          // 7 Element　血色素量
-                          child: TextField(
-                            controller: hEmoController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateHemo();
-                            },
-                            decoration: InputDecoration(
-                                labelText: '血色素量',
-                                labelStyle: textStyle,
-                                suffix: const Text(' g/dL'),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
-                        ),
-                      ],
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: ureaNitrogenController,
+                  style: textStyle,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Title Text Field');
+                    updateUreaNitrogen();
+                  },
+                  decoration: InputDecoration(
+                      labelText: '尿素窒素',
+                      labelStyle: textStyle,
+                      suffix: const Text(' mg/dL'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                ),
+              ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: sugarController,
+                      style: textStyle,
+                      //keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        debugPrint('Something changed in Title Text Field');
+                        updateSugar();
+                      },
+                      decoration: InputDecoration(
+                          labelText: '尿糖',
+                          labelStyle: textStyle,
+                          //suffix: const Text(' g/dL'),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: urineController,
+                      style: textStyle,
+                      //keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        debugPrint('Something changed in Title Text Field');
+                        updateUrine();
+                      },
+                      decoration: InputDecoration(
+                          labelText: '尿蛋白',
+                          labelStyle: textStyle,
+                          //suffix: const Text(' mg/dL'),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
                     ),
                   ),
 
-                  //肝機能検査　横並び３つ- GOT/GPT/rGPT---------------
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          // ＧＯＴ
-                          child: TextField(
-                            controller: gOtController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateGot();
-                            },
-                            decoration: InputDecoration(
-                                labelText: 'ＧＯＴ',
-                                labelStyle: textStyle,
-                                suffix: const Text(' U/L'),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
-                        ),
-                        Container(
-                          width: 5.0,
-                        ),
-                        Expanded(
-                          // ＧＰＴ
-                          child: TextField(
-                            controller: gPtController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateGpt();
-                            },
-                            decoration: InputDecoration(
-                                labelText: 'ＧＰＴ',
-                                labelStyle: textStyle,
-                                suffix: const Text(' U/L'),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
-                        ),
-                        Container(
-                          width: 5.0,
-                        ),
-                        Expanded(
-                          // ガンマ
-                          child: TextField(
-                            controller: gTpController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateGtp();
-                            },
-                            decoration: InputDecoration(
-                                labelText: 'ガンマGPT',
-                                labelStyle: textStyle,
-                                suffix: const Text(' U/L'),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  //ＬＤＬとＨＤＬ----------------
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          // LDL
-                          child: TextField(
-                            controller: lDlController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateLdl();
-                            },
-                            decoration: InputDecoration(
-                                labelText: 'ＬＤＬ',
-                                labelStyle: textStyle,
-                                suffix: const Text(' mg/dL'),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
-                        ),
-                        Container(
-                          width: 5.0,
-                        ),
-                        Expanded(
-                          // ＨＤＬ
-                          child: TextField(
-                            controller: hDlController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateHdl();
-                            },
-                            decoration: InputDecoration(
-                                labelText: 'ＨＤＬ',
-                                labelStyle: textStyle,
-                                suffix: const Text(' mg/dL'),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
-                        ),
-                        Container(
-                          width: 5.0,
-                        ),
-                        Expanded(
-                          // 中性脂肪
-                          child: TextField(
-                            controller: nFatController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateNeutralfat();
-                            },
-                            decoration: InputDecoration(
-                                labelText: '中性脂肪',
-                                labelStyle: textStyle,
-                                suffix: const Text(' mg/dL'),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  //血糖検査
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15.0, bottom: 2.5),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          // 空腹時血糖
-                          child: TextField(
-                            controller: bGluController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateBloodglucose();
-                            },
-                            decoration: InputDecoration(
-                              labelText: '空腹時血糖',
-                              labelStyle: textStyle,
-                              suffix: const Text(' mg/dL'),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 5.0,
-                        ),
-                        Expanded(
-                          // A1c
-                          child: TextField(
-                            controller: hA1cController,
-                            style: textStyle,
-                            textAlign: TextAlign.right,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              debugPrint(
-                                  'Something changed in Description Text Field');
-                              updateHA1c();
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'hA1c',
-                              labelStyle: textStyle,
-                              suffix: const Text(' %'),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              //クレアチニン
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: creatinineController,
+                  style: textStyle,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Title Text Field');
+                    updateEcg();
+                  },
+                  decoration: InputDecoration(
+                      labelText: 'クレアチニン',
+                      labelStyle: textStyle,
+                      suffix: const Text(' mg/dL'),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                ),
               ),
+              //尿潜血
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: latentBloodController,
+                  style: textStyle,
+                  //keyboardType:TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Title Text Field');
+                    updateLatentBlood();
+                  },
+                  decoration: InputDecoration(
+                      labelText: '尿潜血',
+                      labelStyle: textStyle,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                ),
+              ),
+            ]),
+            //アミラーゼ
+            ExpansionTile(
+              title: const Text('アミラーゼ'),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: amylaseController,
+                    style: textStyle,
+                    //keyboardType:TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateEcg();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'アミラーゼ',
+                        labelStyle: textStyle,
+                        suffix: const Text(' U/L'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                const Text(''),
+              ],
             ),
-            //
-            //
+            // 空腹時血糖//糖代謝--------------------------------------
+            ExpansionTile(title: const Text('糖代謝'),
+                children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: bGluController,
+                  style: textStyle,
+                  textAlign: TextAlign.right,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Description Text Field');
+                    updateBloodglucose();
+                  },
+                  decoration: InputDecoration(
+                    labelText: '空腹時血糖',
+                    labelStyle: textStyle,
+                    suffix: const Text(' mg/dL'),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
+                  ),
+                ),
+              ),
+              // A1c
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: hA1cController,
+                  style: textStyle,
+                  textAlign: TextAlign.right,
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    debugPrint('Something changed in Description Text Field');
+                    updateHA1c();
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'hA1c',
+                    labelStyle: textStyle,
+                    suffix: const Text(' %'),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
+                  ),
+                ),
+              ),
+            ]),
+            //白血球数
+            ExpansionTile(
+              title: const Text('白血球数'),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: whiteBloodCellController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateWhiteBloodCell();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '白血球',
+                        labelStyle: textStyle,
+                        suffix: const Text(' /μL'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                const Text(''),
+              ],
+            ),
+            // 6 Element　赤血球数//貧血--------------------------------------
+            ExpansionTile(
+              title: const Text('貧血'),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: rBController,
+                    style: textStyle,
+                    textAlign: TextAlign.right,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Description Text Field');
+                      updateRedblood();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '赤血球数',
+                        labelStyle: textStyle,
+                        suffix: const Text(' 万/μL'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+
+                // 7 Element　血色素量
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: hEmoController,
+                    style: textStyle,
+                    textAlign: TextAlign.right,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Description Text Field');
+                      updateHemo();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '血色素量',
+                        labelStyle: textStyle,
+                        suffix: const Text(' g/dL'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                //ヘマトクリット
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: hematocritController,
+                    style: textStyle,
+                    //keyboardType:TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateHematocrit();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'ヘマトクリット',
+                        suffix: const Text(' %'),
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                //MCV
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: mcvController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateEcg();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'MCV',
+                        suffix: const Text(' fL'),
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                //MCH
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: mcvController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateEcg();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'MCV',
+                        labelStyle: textStyle,
+                        suffix: const Text(' fL'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                //MCHC
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: mchcController,
+                    style: textStyle,
+                    //keyboardType:TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateMchc();
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'MCHC',
+                        labelStyle: textStyle,
+                        suffix: const Text(' %'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                //serumIron
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: serumIronController,
+                    style: textStyle,
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateEcg();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '血清鉄',
+                        labelStyle: textStyle,
+                        suffix: const Text('μg/dL'),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+              ],
+            ),
+            //platelet
+            ExpansionTile(
+              title: const Text('血小板'),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  child: TextField(
+                    controller: plateletController,
+                    style: textStyle,
+                    //keyboardType:TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updatePlatelet();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '血小板数',
+                        suffix: const Text(' 万/'),
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                const Text(''),
+              ],
+            ),
+            //便潜血
+            ExpansionTile(
+              title: const Text('便潜血'),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: bloodInTheStoolController,
+                    style: textStyle,
+                    //keyboardType:TextInputType.number,
+                    onChanged: (value) {
+                      debugPrint('Something changed in Title Text Field');
+                      updateBloodIn();
+                    },
+                    decoration: InputDecoration(
+                        labelText: '便潜血',
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0))),
+                  ),
+                ),
+                const Text(''),
+              ],
+            ),
             /* 5 Element　削除　横並び表示
                ---------------------------------------------- */
             Padding(
               padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: Row(
-                children: <Widget>[
-                  /* Expanded(
-                        // ignore: deprecated_member_use
-                        child: ElevatedButton(
-                          /* color: Theme.of(context).primaryColorDark,
-                          textColor: Theme.of(context).primaryColorLight,*/
-                          child: const Text(
-                            'Save',
-                            textScaleFactor: 1.5,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              debugPrint("Save button clicked");
-                              _save();
-                            });
-                          },
-                        ),
-                      ),*/
-                  Expanded(
-                    // ignore: deprecated_member_use
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey,
-                          textStyle: const TextStyle(color: Colors.red)),
-                      child: const Text(
-                        'Delete',
-                        textScaleFactor: 1.5,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          debugPrint("Delete button clicked");
-                          _delete();
-                        });
-                      },
-                    ),
+              child: Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      textStyle: const TextStyle(color: Colors.red)),
+                  child: const Text(
+                    'Delete',
+                    textScaleFactor: 1.5,
                   ),
-                ],
+                  onPressed: () {
+                    setState(() {
+                      debugPrint("Delete button clicked");
+                      _delete();
+                    });
+                  },
+                ),
               ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {setState(() {_save();});},
+        onPressed: () {
+          setState(() {
+            _save();
+          });
+        },
         tooltip: 'save',
+        backgroundColor: Colors.greenAccent,
         child: const Icon(Icons.save),
-        backgroundColor: Colors.deepOrange,
       ),
     );
   }
@@ -1335,6 +1342,14 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
 
   void updateHBp() {
     widget.model.high_blood_pressure_12 = hBpController.text;
+  }
+
+  void updateSugar(){
+    widget.model.sugar_26 = sugarController.text;
+  }
+
+  void updateUrine(){
+    widget.model.urine_25 = urineController.text;
   }
 
   void updateOTD() {

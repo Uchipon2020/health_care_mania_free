@@ -140,7 +140,7 @@ class ModelListScreenState extends State<ModelListScreen> {
       Future<List> noteListFuture = databaseHelper.getModelList();
       noteListFuture.then((modelsList) {
         setState(() {
-          this.modelList = modelsList.cast<Model>();
+          modelList = modelsList.cast<Model>();
           count = modelsList.length;
         });
       });
