@@ -121,13 +121,20 @@ class ModelListScreenState extends State<ModelListScreen> {
   }
 
   void navigateToView(Model models, String appBarTitle) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return ModelViewScreen(
-            model: models,
-            appBarTitle: appBarTitle,
+    await Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return ModelViewScreen(appBarTitle: appBarTitle, model: models);
+        },
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const Offset begin = Offset(-1.0, 0.0); // 左から右
+          const Offset end = Offset.zero;
+          final Animatable<Offset> tween = Tween(begin: begin, end: end)
+              .chain(CurveTween(curve: Curves.easeInOut));
+          final Animation<Offset> offsetAnimation = animation.drive(tween);
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
           );
         },
       ),
