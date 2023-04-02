@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         title: 'Health Care Mania',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primarySwatch: Colors.amber
+            primarySwatch: Colors.cyan
         ),
         home: const ModelListScreen(),
         localizationsDelegates:const [

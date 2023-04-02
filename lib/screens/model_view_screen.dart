@@ -138,7 +138,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
         padding: const EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
         child: ListView(
           children: <Widget>[
-            ListTile(
+            /*ListTile(
               title: DropdownButton(
                 items: _priorities.map((String dropDownStringItem) {
                   return DropdownMenuItem<String>(
@@ -162,7 +162,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                   });
                 },
               ),
-            ),
+            ),*/
             // 24 Element　受診日
             Padding(
               padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
