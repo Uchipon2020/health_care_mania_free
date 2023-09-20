@@ -224,6 +224,7 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
                           BloodPressureGraph(modelList: widget.modelList)));
                 },
                 child: Card(
+
                   elevation: 0.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
