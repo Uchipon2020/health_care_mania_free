@@ -91,7 +91,7 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(children: [
-          Text('検査種別: ${modelViews[99]!}'),
+         // Text('検査種別: ${modelViews[99]!}'), ;普及版では使用せず
           Card(
             elevation: 0.0,
             child: Text(

@@ -66,10 +66,11 @@ class ModelListScreenState extends State<ModelListScreen> {
           color: Colors.white,
           elevation: 5.0,
           child: ListTile(
+            /*普及版では使用せず
             leading: CircleAvatar(
               backgroundColor: getPriorityColor(modelList![position].priority),
               child: getPriorityIcon(modelList![position].priority),
-            ),
+            ),*/
             title: Text('受診日 : ${modelList![position].on_the_day_24}'),
             subtitle: Text('更新日${modelList![position].date}'),
             trailing: GestureDetector(
@@ -92,6 +93,8 @@ class ModelListScreenState extends State<ModelListScreen> {
   }
 
   // Returns the priority color
+  /*
+  普及版では表示せず
   Color getPriorityColor(int priority) {
     switch (priority) {
       case 1: //type = "定期健康診断";
@@ -103,7 +106,7 @@ class ModelListScreenState extends State<ModelListScreen> {
       default:
         return Colors.amber;
     }
-  }
+  }*/
 
   // Returns the priority icon
   Icon getPriorityIcon(int priority) {
