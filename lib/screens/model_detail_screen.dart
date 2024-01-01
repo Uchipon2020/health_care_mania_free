@@ -818,6 +818,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     decoration: InputDecoration(
                         labelText: '尿酸',
                         labelStyle: textStyle,
+                        suffix: const Text(' mg/dL'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
@@ -859,7 +860,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       decoration: InputDecoration(
                           labelText: '尿糖',
                           labelStyle: textStyle,
-                          //suffix: const Text(' g/dL'),
+                          suffix: const Text(' mg/dL'),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0))),
                     ),
@@ -877,7 +878,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       decoration: InputDecoration(
                           labelText: '尿蛋白',
                           labelStyle: textStyle,
-                          //suffix: const Text(' mg/dL'),
+                          suffix: const Text(' mg/dL'),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0))),
                     ),
