@@ -60,6 +60,7 @@ class DatabaseHelper {
   String colMchc = 'mchc';
   String colSerumIron = 'serumIron';
   String colPlatelet = 'platelet';
+  String colInternal = 'internal';
 
   DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
 
@@ -101,7 +102,7 @@ class DatabaseHelper {
         ' $colAlbumin TEXT, $colTotalBilirubin TEXT, $colAlp TEXT, $colTotalCholesterol TEXT,'//
         ' $colUricAcid TEXT, $colReaNitrogen TEXT, $colCreatinine TEXT, $colAmylase TEXT,'
         ' $colWhiteBloodCell TEXT, $colHematocrit TEXT, $colMcv TEXT, $colMch TEXT, $colMchc TEXT,'
-        ' $colSerumIron TEXT, $colPlatelet TEXT)');
+        ' $colSerumIron TEXT, $colPlatelet TEXT, $colInternal TEXT)');
   }
 
   void _upgradeDB(Database db, int oldVersion, int newVersion) async {
@@ -126,6 +127,7 @@ class DatabaseHelper {
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colMchc TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colSerumIron TEXT');
     await db.execute('ALTER TABLE $modelTable ADD COLUMN $colPlatelet TEXT');
+    await db.execute('ALTER TABLE $modelTable ADD COLUMN $colInternal TEXT');
   }
 
   Future<List<Map<String, dynamic>>> getModelMapList() async {

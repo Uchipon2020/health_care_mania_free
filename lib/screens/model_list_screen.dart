@@ -19,7 +19,14 @@ class ModelListScreen extends StatefulWidget {
 class ModelListScreenState extends State<ModelListScreen> {
   DatabaseHelper databaseHelper = DatabaseHelper();
   List<Model>? modelList;
+  List<Model>? modelListWeight;
+  List<Model>? modelListBloodHight;
+  List<Model>? modelListBloodLow;
   int count = 0;
+  int weightCount = 0;
+  int bloodHeightCount = 0;
+  int bloodLowCount = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +44,7 @@ class ModelListScreenState extends State<ModelListScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB clicked');
-          navigateToDetail(Model(1,''), '新規登録');
+          navigateToDetail(Model(1, ''), '新規登録');
         },
         tooltip: '新規登録',
         child: const Icon(Icons.add),
@@ -46,6 +53,12 @@ class ModelListScreenState extends State<ModelListScreen> {
   }
 
   ListView getModelListView() {
+    // モデルリストを日付順にソート
+    modelList!.sort((a, b) {
+      DateTime dateA = _parseJapaneseDate(a.on_the_day_24);
+      DateTime dateB = _parseJapaneseDate(b.on_the_day_24);
+      return dateA.compareTo(dateB);
+    });
     return ListView.builder(
       itemCount: count,
       itemBuilder: (BuildContext context, int position) {
@@ -53,7 +66,8 @@ class ModelListScreenState extends State<ModelListScreen> {
           color: Colors.white,
           elevation: 5.0,
           child: ListTile(
-            /*leading: CircleAvatar(
+            /*普及版では使用せず
+            leading: CircleAvatar(
               backgroundColor: getPriorityColor(modelList![position].priority),
               child: getPriorityIcon(modelList![position].priority),
             ),*/
@@ -79,6 +93,8 @@ class ModelListScreenState extends State<ModelListScreen> {
   }
 
   // Returns the priority color
+  /*
+  普及版では表示せず
   Color getPriorityColor(int priority) {
     switch (priority) {
       case 1: //type = "定期健康診断";
@@ -90,7 +106,7 @@ class ModelListScreenState extends State<ModelListScreen> {
       default:
         return Colors.amber;
     }
-  }
+  }*/
 
   // Returns the priority icon
   Icon getPriorityIcon(int priority) {
@@ -107,13 +123,17 @@ class ModelListScreenState extends State<ModelListScreen> {
   }
 
   void navigateToDetail(Model models, String appBarTitle) async {
-    bool result =
-        await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ModelDetailScreen(
-        model: models,
-        appBarTitle: appBarTitle,
-      );
-    },),);
+    bool result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return ModelDetailScreen(
+            model: models,
+            appBarTitle: appBarTitle,
+          );
+        },
+      ),
+    );
 
     if (result == true) {
       updateListView();
@@ -124,7 +144,11 @@ class ModelListScreenState extends State<ModelListScreen> {
     await Navigator.of(context).push(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
-          return ModelViewScreen(appBarTitle: appBarTitle, model: models);
+          return ModelViewScreen2(
+              appBarTitle: appBarTitle,
+              model: models,
+              modelList: modelList!
+          );
         },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const Offset begin = Offset(-1.0, 0.0); // 左から右
@@ -152,5 +176,20 @@ class ModelListScreenState extends State<ModelListScreen> {
         });
       });
     });
+  }
+
+  // 日本語の日付文字列をDateTimeに変換する関数
+  DateTime _parseJapaneseDate(String dateStr) {
+    final RegExp regex = RegExp(r'(\d{4})年(\d{1,2})月(\d{1,2})日');
+    final match = regex.firstMatch(dateStr);
+    if (match != null) {
+      final year = int.parse(match.group(1)!);
+      final month = int.parse(match.group(2)!);
+      final day = int.parse(match.group(3)!);
+      return DateTime(year, month, day);
+    } else {
+      // マッチしない場合のデフォルト値
+      return DateTime(0);
+    }
   }
 }

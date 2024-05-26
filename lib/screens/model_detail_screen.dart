@@ -66,6 +66,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
   final mchcController = TextEditingController();
   final serumIronController = TextEditingController();
   final plateletController = TextEditingController();
+  final internalController = TextEditingController();
 
   @override
   void initState() {
@@ -118,6 +119,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     mchcController.text = widget.model.mchc_44;
     serumIronController.text = widget.model.serumIron_45;
     plateletController.text = widget.model.platelet_46;
+    internalController.text = widget.model.internal_47;
   }
 
   @override
@@ -549,6 +551,25 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                         borderRadius: BorderRadius.circular(5.0))),
               ),
             ),
+            //内科診察
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: TextField(
+                controller: internalController,
+                style: textStyle,
+                //keyboardType:TextInputType.number,
+                onChanged: (value) {
+                  debugPrint('Something changed in Title Text Field');
+                  updateInternal();
+                },
+                decoration: InputDecoration(
+                    labelText: '内科診察所見',
+                    labelStyle: textStyle,
+                    icon: const Icon(Icons.accessibility),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
+              ),
+            ),
             //　血液検査関係-------------
             //血清蛋白-----------------------------------------
             ExpansionTile(
@@ -797,6 +818,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                     decoration: InputDecoration(
                         labelText: '尿酸',
                         labelStyle: textStyle,
+                        suffix: const Text(' mg/dL'),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0))),
                   ),
@@ -838,7 +860,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       decoration: InputDecoration(
                           labelText: '尿糖',
                           labelStyle: textStyle,
-                          //suffix: const Text(' g/dL'),
+                          suffix: const Text(' mg/dL'),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0))),
                     ),
@@ -856,7 +878,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                       decoration: InputDecoration(
                           labelText: '尿蛋白',
                           labelStyle: textStyle,
-                          //suffix: const Text(' mg/dL'),
+                          suffix: const Text(' mg/dL'),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0))),
                     ),
@@ -1445,6 +1467,10 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
 
   void updatePlatelet() {
     widget.model.platelet_46 = plateletController.text;
+  }
+
+  void updateInternal(){
+    widget.model.internal_47 = internalController.text;
   }
 
   Future<void> _selectDate(BuildContext context) async {
