@@ -32,7 +32,7 @@ class _WeightGraphState extends State<WeightGraph> {
             style: _titleStyle,
           ),
           axisNameSize: 48),
-      rightTitles: AxisTitles(
+      rightTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
           )),

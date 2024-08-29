@@ -1,7 +1,6 @@
 import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sqflite/sqflite.dart';
 import '../models/model.dart';
 import '../utils/database_helper.dart';
@@ -9,7 +8,7 @@ import 'model_detail_screen.dart';
 import 'model_view_screen.dart';
 
 class ModelListScreen extends StatefulWidget {
-  const ModelListScreen({Key? key}) : super(key: key);
+  const ModelListScreen({super.key});
   @override
   State<StatefulWidget> createState() {
     return ModelListScreenState();
@@ -27,12 +26,42 @@ class ModelListScreenState extends State<ModelListScreen> {
   int bloodHeightCount = 0;
   int bloodLowCount = 0;
 
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+
+  @override
+  void initState(){
+    debugPrint('Adrequest通過');
+    super.initState();
+    _bannerAd = BannerAd(
+      adUnitId: 'ca-app-pub-6658769444839234~3190822190',
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        },
+      ),
+    );
+    _bannerAd.load();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     if (modelList == null) {
       modelList = <Model>[];
-      debugPrint('初期リセットビルド通過');
+      debugPrint('初期リセットビルド通過５５５');
       updateListView();
     }
 
@@ -40,7 +69,22 @@ class ModelListScreenState extends State<ModelListScreen> {
       appBar: AppBar(
         title: const Text('HEALTHCARE MANIA'),
       ),
-      body: getModelListView(),
+      body: Column(
+        children:  [
+          Expanded(
+              child: getModelListView()
+          ),
+          if (_isBannerAdReady)
+            Container(
+              alignment: Alignment.center,
+              width: _bannerAd.size.width.toDouble(),
+              height: _bannerAd.size.height.toDouble(),
+              child: AdWidget(ad: _bannerAd),
+            )
+          else
+            const SizedBox(), // 広告が読み込まれていない場合はスペースを占有しない
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB clicked');
@@ -144,7 +188,7 @@ class ModelListScreenState extends State<ModelListScreen> {
     await Navigator.of(context).push(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) {
-          return ModelViewScreen2(
+          return ModelViewScreen(
               appBarTitle: appBarTitle,
               model: models,
               modelList: modelList!

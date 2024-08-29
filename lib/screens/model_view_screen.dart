@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:healthcare_mania_legacy_new/screens/graph/blood_Presser_graph.dart';
 import 'package:healthcare_mania_legacy_new/screens/graph/weight_graph.dart';
 import '../models/model.dart';
 import 'graph/blood_pressure_graph.dart';
 
-class ModelViewScreen2 extends StatefulWidget {
+class ModelViewScreen extends StatefulWidget {
   final String appBarTitle;
   final Model model;
   final List<Model> modelList;
-  const ModelViewScreen2(
-      {Key? key,
-        required this.appBarTitle,
-        required this.model,
-        required this.modelList})
-      : super(key: key);
+  const ModelViewScreen(
+      {super.key,
+      required this.appBarTitle,
+      required this.model,
+      required this.modelList});
   @override
-  State<ModelViewScreen2> createState() => _ModelViewScreen2State();
+  State<ModelViewScreen> createState() => _ModelViewScreenState();
 }
 
-class _ModelViewScreen2State extends State<ModelViewScreen2> {
+class _ModelViewScreenState extends State<ModelViewScreen> {
   static final _priorities = ['定期健康診断', '人間ドック', '独自検査'];
   late Map<int, String> modelViews;
   @override
   void initState() {
     super.initState();
     modelViews = {
-      99: _priorities[widget.model.priority],
+      99: _priorities[widget.model.priority - 1],
       1: widget.model.height_1,
       2: widget.model.weight_2,
       3: widget.model.waist_3,
@@ -81,17 +81,16 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
       if (modelViews[i] == '') {
         modelViews[i] = ' -- ';
       }
-      ;
     }
     return Scaffold(
       appBar: AppBar(
         title:
-        Text('${widget.appBarTitle} : ${widget.model.on_the_day_24} 実施分'),
+            Text('${widget.appBarTitle} : ${widget.model.on_the_day_24} 実施分'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(children: [
-         // Text('検査種別: ${modelViews[99]!}'), ;普及版では使用せず
+          //Text('検査種別: ${modelViews[99]!}'),
           Card(
             elevation: 0.0,
             child: Text(
@@ -145,22 +144,6 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
               Row(
                 children: [
                   Text(
-                    '右目（裸眼）：${modelViews[4]!}',
-                    style: TextStyle(
-                      fontWeight: weightCheck(4),
-                    ),
-                  ),
-                  Text(
-                    '/ 左目（裸眼）：${modelViews[5]!}',
-                    style: TextStyle(
-                      fontWeight: weightCheck(5),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
                     '右目（矯正）：${modelViews[27]!}',
                     style: TextStyle(
                       fontWeight: weightCheck(27),
@@ -174,43 +157,52 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  Text(
+                    '右目（裸眼）：${modelViews[4]!}',
+                    style: TextStyle(
+                      fontWeight: weightCheck(4),
+                    ),
+                  ),
+                  Text(
+                    '/ 左目（裸眼）：${modelViews[5]!}',
+                    style: TextStyle(
+                      fontWeight: weightCheck(5),
+                    ),
+                  ),
+                ],
+              ),
             ]),
           ),
           Card(
             elevation: 0.0,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      '右聴力 1000Mz：${modelViews[6]!}',
-                      style: TextStyle(
-                        fontWeight: weightCheck(6),
-                      ),
-                    ),
-                    Text(
-                      '/ 左聴力 1000Mz：${modelViews[7]!}',
-                      style: TextStyle(
-                        fontWeight: weightCheck(7),
-                      ),
-                    ),
-                  ],
+                Text(
+                  '右聴力 1000Mz：${modelViews[6]!}',
+                  style: TextStyle(
+                    fontWeight: weightCheck(6),
+                  ),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      '右聴力 4000Mz：${modelViews[8]!}',
-                      style: TextStyle(
-                        fontWeight: weightCheck(8),
-                      ),
-                    ),
-                    Text(
-                      '/ 左聴力 4000Mz：${modelViews[9]!}',
-                      style: TextStyle(
-                        fontWeight: weightCheck(9),
-                      ),
-                    ),
-                  ],
+                Text(
+                  '左聴力 1000Mz：${modelViews[7]!}',
+                  style: TextStyle(
+                    fontWeight: weightCheck(7),
+                  ),
+                ),
+                Text(
+                  '右聴力 4000Mz：${modelViews[8]!}',
+                  style: TextStyle(
+                    fontWeight: weightCheck(8),
+                  ),
+                ),
+                Text(
+                  '左聴力 4000Mz：${modelViews[9]!}',
+                  style: TextStyle(
+                    fontWeight: weightCheck(9),
+                  ),
                 ),
               ],
             ),
@@ -224,7 +216,6 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
                           BloodPressureGraph(modelList: widget.modelList)));
                 },
                 child: Card(
-
                   elevation: 0.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -507,7 +498,7 @@ class _ModelViewScreen2State extends State<ModelViewScreen2> {
                   textAlign: TextAlign.left,
                 ),
                 Text(
-                  'ｈＡ１ｃ：${modelViews[22]!} %',
+                  'HbA1c：${modelViews[22]!} %',
                   style: TextStyle(
                     fontWeight: weightCheck(22),
                   ),

@@ -1,12 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../models/model.dart';
 
 class BloodPressureGraph extends StatefulWidget {
   List<Model>? modelList;
-  BloodPressureGraph({required this.modelList, Key? key}) : super(key: key);
+  BloodPressureGraph({required this.modelList, super.key});
 
   @override
   State<BloodPressureGraph> createState() => _BloodPressureGraphState();
@@ -31,7 +30,7 @@ class _BloodPressureGraphState extends State<BloodPressureGraph> {
             style: _titleStyle,
           ),
           axisNameSize: 48),
-      rightTitles: AxisTitles(
+      rightTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
           )),
