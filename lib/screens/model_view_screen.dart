@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:healthcare_mania_legacy_new/screens/graph/blood_Presser_graph.dart';
-import 'package:healthcare_mania_legacy_new/screens/graph/weight_graph.dart';
+import 'package:healthcare_mania_free/screens/graph/blood_Presser_graph.dart';
+import 'package:healthcare_mania_free/screens/graph/weight_graph.dart';
 import '../models/model.dart';
 import 'graph/blood_pressure_graph.dart';
 

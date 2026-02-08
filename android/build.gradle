@@ -3,34 +3,18 @@ allprojects {
         google()
         mavenCentral()
     }
-
-    rootProject.buildDir = '../build'
-    subprojects {
-        project.buildDir = "${rootProject.buildDir}/${project.name}"
-    }
-    subprojects {
-        project.evaluationDependsOn(':app')
-    }
-
-   // tasks.register("clean", Delete) {
-    //    delete rootProject.buildDir
-    //}
-}
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
 }
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
+rootProject.buildDir = '../build'
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 
-rootProject.name = "My Application"
-include(":app")
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

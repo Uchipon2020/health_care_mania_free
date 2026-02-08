@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sqflite/sqflite.dart';
+import '../main.dart';
 import '../models/model.dart';
 import '../utils/database_helper.dart';
 import 'model_detail_screen.dart';
@@ -85,6 +86,7 @@ class ModelListScreenState extends State<ModelListScreen> {
             const SizedBox(), // 広告が読み込まれていない場合はスペースを占有しない
         ],
       ),
+      bottomNavigationBar: const AdBannerWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB clicked');

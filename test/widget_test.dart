@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:healthcare_mania_legacy_new/main.dart' show MyApp;
+import 'package:healthcare_mania_free/main.dart' show MyApp;
 
 
 void main() {

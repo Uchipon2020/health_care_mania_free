@@ -1,10 +1,12 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="info.humedical.healthcare_mania_release">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:label="Healthcare Mania"
-        android:name="healthcare_mania_legacy_new"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6658769444839234~3190822190"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -15,9 +17,6 @@
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme"/>
-            <meta-data
-                android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="ca-app-pub-6658769444839234~3190822190"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
