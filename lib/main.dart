@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'ads/ad_units.dart';
 import 'screens/model_list_screen.dart';
 
 void main() async {
@@ -55,7 +56,7 @@ class _AdBannerWidgetState extends State<AdBannerWidget> {
     super.initState();
 
     _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-3940256099942544/6300978111', // テストID
+      adUnitId: AdUnits.banner(),
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
