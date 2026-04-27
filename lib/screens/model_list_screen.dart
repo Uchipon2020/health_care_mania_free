@@ -27,34 +27,15 @@ class ModelListScreenState extends State<ModelListScreen> {
   int bloodHeightCount = 0;
   int bloodLowCount = 0;
 
-  late BannerAd _bannerAd;
-  bool _isBannerAdReady = false;
-
   @override
   void initState(){
     debugPrint('Adrequest通過');
     super.initState();
-    _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-6658769444839234~3190822190',
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          setState(() {
-            _isBannerAdReady = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          ad.dispose();
-        },
-      ),
-    );
-    _bannerAd.load();
+
   }
 
   @override
   void dispose() {
-    _bannerAd.dispose();
     super.dispose();
   }
 
@@ -70,22 +51,7 @@ class ModelListScreenState extends State<ModelListScreen> {
       appBar: AppBar(
         title: const Text('HEALTHCARE MANIA'),
       ),
-      body: Column(
-        children:  [
-          Expanded(
-              child: getModelListView()
-          ),
-          if (_isBannerAdReady)
-            Container(
-              alignment: Alignment.center,
-              width: _bannerAd.size.width.toDouble(),
-              height: _bannerAd.size.height.toDouble(),
-              child: AdWidget(ad: _bannerAd),
-            )
-          else
-            const SizedBox(), // 広告が読み込まれていない場合はスペースを占有しない
-        ],
-      ),
+      body:getModelListView(),
       bottomNavigationBar: const AdBannerWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -121,7 +87,7 @@ class ModelListScreenState extends State<ModelListScreen> {
             subtitle: Text('更新日${modelList![position].date}'),
             trailing: GestureDetector(
               child: IconButton(
-                icon: const Icon(Icons.account_balance_wallet),
+                icon: const Icon(Icons.edit_note),
                 color: Colors.grey,
                 onPressed: () {
                   navigateToDetail(modelList![position], '訂正');

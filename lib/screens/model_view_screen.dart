@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthcare_mania_free/screens/graph/blood_Presser_graph.dart';
 import 'package:healthcare_mania_free/screens/graph/weight_graph.dart';
 import '../models/model.dart';
 import 'graph/blood_pressure_graph.dart';
@@ -92,7 +91,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
         child: ListView(children: [
           //Text('検査種別: ${modelViews[99]!}'),
           Card(
-            elevation: 0.0,
+            elevation: 2.0,
             child: Text(
               '身長: ${modelViews[1]!} cm',
               style: TextStyle(
@@ -109,7 +108,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           WeightGraph(modelList: widget.modelList)));
                 },
                 child: Card(
-                  elevation: 0.0,
+                  elevation: 2.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -130,7 +129,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ],
           ),
           Card(
-            elevation: 0.0,
+            elevation: 2.0,
             child: Text(
               '腹囲: ${modelViews[3]!} cm',
               style: TextStyle(
@@ -139,7 +138,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ),
           ),
           Card(
-            elevation: 0.0,
+            elevation: 2.0,
             child: Column(children: [
               Row(
                 children: [
@@ -176,7 +175,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ]),
           ),
           Card(
-            elevation: 0.0,
+            elevation: 2.0,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -216,7 +215,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           BloodPressureGraph(modelList: widget.modelList)));
                 },
                 child: Card(
-                  elevation: 0.0,
+                  elevation: 2.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -244,7 +243,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ],
           ),
           Card(
-            elevation: 0.0,
+            elevation: 2.0,
             child: Text(
               'X-線検査：${modelViews[10]!}',
               style: TextStyle(
@@ -253,7 +252,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ),
           ),
           Card(
-            elevation: 0.0,
+            elevation: 2.0,
             child: Text(
               '心電図検査所見：${modelViews[23]!}',
               style: TextStyle(
@@ -262,7 +261,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ),
           ),
           Card(
-            elevation: 0.0,
+            elevation: 2.0,
             child: Text(
               '内科診察所見：${modelViews[47]!}',
               style: TextStyle(
@@ -278,20 +277,35 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             indent: 20,
             endIndent: 0,
           ),
-          const Text(
-            '血液検査',
-            style: TextStyle(color: Colors.red),
+          Container(
+            width: double.infinity,
+            color: Colors.grey[200],
+            padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+            child: const Text(
+              '血液検査',
+              style: TextStyle(color: Colors.red,
+              fontSize: 12,
+              fontWeight: FontWeight.bold),
+            ),
           ),
           Card(
             elevation: 0.0,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '血清蛋白',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                if([31,32].any((i) => modelViews[i] != ' -- '))
+                Container(
+                  width:double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child:
+                    Text(
+                    '血清蛋白',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
+                if (modelViews[31] != ' -- ')
                 Text(
                   '総蛋白：${modelViews[31]!}g/dL',
                   textAlign: TextAlign.left,
@@ -299,6 +313,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                     fontWeight: weightCheck(31),
                   ),
                 ),
+                if (modelViews[32] != ' -- ')
                 Text(
                   'アルブミン：${modelViews[32]!} g/dL',
                   textAlign: TextAlign.left,
@@ -317,10 +332,18 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '肝機能',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: const Text(
+                    '肝機能',
+                    style: TextStyle(
+                        color: Colors.grey,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 Text(
                   '総ビリルビン：${modelViews[33]!} mg/dL',
@@ -361,9 +384,14 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '脂質',
-                  style: TextStyle(color: Colors.grey),
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text(
+                    '脂質',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Text(
                   '総コレステロール：${modelViews[35]!} mg/dL',
@@ -398,10 +426,15 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '尿酸',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text(
+                    '尿酸',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
                 Text(
                   '尿酸：${modelViews[36]!}',
@@ -419,10 +452,15 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '腎機能',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text(
+                    '腎機能',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
                 Text(
                   '尿素窒素：${modelViews[37]!} mg/dL',
@@ -468,9 +506,14 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('アミラーゼ',
-                    style: TextStyle(color: Colors.grey),
-                    textAlign: TextAlign.left),
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text('アミラーゼ',
+                      style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left),
+                ),
                 Text('アミラーゼ：${modelViews[39]!} U/L',
                     style: TextStyle(
                       fontWeight: weightCheck(39),
@@ -485,10 +528,15 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '糖代謝',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text(
+                    '糖代謝',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
                 Text(
                   '空腹時血糖：${modelViews[21]!} mg/dL',
@@ -513,10 +561,15 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '白血球数',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text(
+                    '白血球数',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
                 Text(
                   '白血球数: ${modelViews[40]!} /μL',
@@ -534,10 +587,15 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '貧血',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text(
+                    '貧血',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
                 Text(
                   '赤血球数: ${modelViews[13]!} 万/μL',
@@ -597,10 +655,15 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '血小板',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text(
+                    '血小板',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
                 Text(
                   '血小板：${modelViews[46]!}  万/μL',
@@ -627,10 +690,15 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '便潜血',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.left,
+                Container(
+                  width: double.infinity,
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  child: const Text(
+                    '便潜血',
+                    style: TextStyle(color: Colors.grey,fontSize: 12,fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
                 Text(
                   '便潜血：${modelViews[30]!},',
