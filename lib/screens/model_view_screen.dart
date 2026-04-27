@@ -91,7 +91,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
         child: ListView(children: [
           //Text('検査種別: ${modelViews[99]!}'),
           Card(
-            elevation: 2.0,
+            elevation: 0.0,
             child: Text(
               '身長: ${modelViews[1]!} cm',
               style: TextStyle(
@@ -108,7 +108,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           WeightGraph(modelList: widget.modelList)));
                 },
                 child: Card(
-                  elevation: 2.0,
+                  elevation: 0.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -129,7 +129,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ],
           ),
           Card(
-            elevation: 2.0,
+            elevation: 0.0,
             child: Text(
               '腹囲: ${modelViews[3]!} cm',
               style: TextStyle(
@@ -138,7 +138,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ),
           ),
           Card(
-            elevation: 2.0,
+            elevation: 0.0,
             child: Column(children: [
               Row(
                 children: [
@@ -175,7 +175,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ]),
           ),
           Card(
-            elevation: 2.0,
+            elevation: 0.0,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -215,7 +215,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
                           BloodPressureGraph(modelList: widget.modelList)));
                 },
                 child: Card(
-                  elevation: 2.0,
+                  elevation: 0.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -243,7 +243,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ],
           ),
           Card(
-            elevation: 2.0,
+            elevation: 0.0,
             child: Text(
               'X-線検査：${modelViews[10]!}',
               style: TextStyle(
@@ -252,7 +252,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ),
           ),
           Card(
-            elevation: 2.0,
+            elevation: 0.0,
             child: Text(
               '心電図検査所見：${modelViews[23]!}',
               style: TextStyle(
@@ -261,7 +261,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             ),
           ),
           Card(
-            elevation: 2.0,
+            elevation: 0.0,
             child: Text(
               '内科診察所見：${modelViews[47]!}',
               style: TextStyle(
@@ -277,16 +277,14 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
             indent: 20,
             endIndent: 0,
           ),
-          Container(
-            width: double.infinity,
-            color: Colors.grey[200],
-            padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
-            child: const Text(
-              '血液検査',
-              style: TextStyle(color: Colors.red,
-              fontSize: 12,
-              fontWeight: FontWeight.bold),
-            ),
+          Row(
+            children:[
+              Expanded(child: Divider(color: Colors.red)),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 8),
+              child:Text('血液検査',style: TextStyle(color: Colors.red, fontWeight:FontWeight.bold)),
+              ),
+              Expanded(child: Divider(color: Colors.red)),
+            ],
           ),
           Card(
             elevation: 0.0,
