@@ -6,11 +6,11 @@ class AdUnits {
 
   // テスト用（Google公式）
   static const String _androidTestBanner = 'ca-app-pub-3940256099942544/6300978111';
-  static const String _iosTestBanner = 'ca-app-pub-3940256099942544/2934735716';
+  static const String _iosTestBanner = 'ca-app-pub-6658769444839234~4262075603';
 
   // ここに本番の広告ユニットIDを入れる（/ が入っている方）
   static const String _androidProdBanner = 'ca-app-pub-6658769444839234/1966553639';
-  static const String _iosProdBanner = 'REPLACE_WITH_IOS_BANNER_UNIT_ID';
+  static const String _iosProdBanner = 'ca-app-pub-6658769444839234/2797559501';
 
   static String banner() {
     if (useTestAds) {
