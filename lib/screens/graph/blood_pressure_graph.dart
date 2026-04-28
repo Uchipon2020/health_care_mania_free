@@ -175,29 +175,6 @@ class _BloodPressureGraphState extends State<BloodPressureGraph> {
     );
   }
 
-
-
-  /*LineChart(
-                LineChartData(
-                    backgroundColor: Colors.grey[200],
-                    titlesData: _titles,
-                    minX: 0, // 最小のX軸値
-                    maxX: highBloodPressureDataList!.length -
-                        1.toDouble(), // 最大のX軸値
-                    minY: 0, // 最小のY軸値
-                    maxY: highBloodPressureDataList
-                        ?.reduce((a, b) => a > b ? a : b)
-                        .toDouble(), // 最大のY軸値
-                    lineBarsData: [
-                      LineChartBarData(
-                          isCurved: true,
-                          color: Colors.green[400],
-                          barWidth: 4,
-                          dotData: FlDotData(show: true),
-                          spots: flSpotList),
-                    ]),
-              ),*/
-
   void _generateDataLists() {
     // ウィジェットのモデルリストを日付順にソート
     widget.modelList!.sort((a, b) => DateFormat('yyyy年M月d日')
