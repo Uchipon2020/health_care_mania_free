@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import '../../models/model.dart';
 
 class BloodPressureGraph extends StatefulWidget {
-  List<Model>? modelList;
-  BloodPressureGraph({required this.modelList, super.key});
+  final List<Model>? modelList;
+  const BloodPressureGraph({required this.modelList, super.key});
 
   @override
   State<BloodPressureGraph> createState() => _BloodPressureGraphState();
@@ -85,7 +85,7 @@ class _BloodPressureGraphState extends State<BloodPressureGraph> {
       String dateStr =
           widget.modelList![i].on_the_day_24; // 'date' フィールドから日付文字列を取得
       DateTime originalData = DateFormat('yyyy年M月d日').parse(dateStr);
-      String formattedDatSter = DateFormat('yy.M.dd').format(originalData);
+      String formattedDatSter = DateFormat('yy/M/dd').format(originalData);
       xAxisLabels.add(formattedDatSter);
     }
     return xAxisLabels;

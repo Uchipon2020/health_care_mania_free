@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 import '../../models/model.dart';
 
 class WeightGraph extends StatefulWidget {
-  List<Model>? modelList;
-  WeightGraph({required this.modelList, Key? key}) : super(key: key);
+  final List<Model>? modelList;
+  const WeightGraph({required this.modelList, Key? key}) : super(key: key);
 
   @override
   State<WeightGraph> createState() => _WeightGraphState();
@@ -85,8 +85,8 @@ class _WeightGraphState extends State<WeightGraph> {
     List<String> xAxisLabels = [];
     for (int i = 0; i < weightDataList!.length; i++) {
       String dateStr = widget.modelList![i].on_the_day_24; // 'date' フィールドから日付文字列を取得
-      DateTime originalData = DateFormat('yyyy年M月d日').parse(dateStr);
-      String formattedDatSter = DateFormat('yyyy.MM.dd').format(originalData);
+      DateTime originalData = DateFormat('yy年M月d日').parse(dateStr);
+      String formattedDatSter = DateFormat('yy/M/d').format(originalData);
       xAxisLabels.add(formattedDatSter);
     }
     return xAxisLabels;
