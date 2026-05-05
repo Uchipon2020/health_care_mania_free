@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../ads/google_mobile_ads.dart';
 import '../models/model.dart';
 import '../utils/database_helper.dart';
 
@@ -1246,6 +1247,7 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: const AdBannerWidget(), //
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {

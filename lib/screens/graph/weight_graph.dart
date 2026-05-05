@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../ads/google_mobile_ads.dart';
 import '../../models/model.dart';
 
 class WeightGraph extends StatefulWidget {
@@ -152,6 +153,7 @@ class _WeightGraphState extends State<WeightGraph> {
           ],
         ),
       ),
+      bottomNavigationBar: const AdBannerWidget(), //
     );
   }
 
