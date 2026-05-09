@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthcare_mania_free/screens/graph/weight_graph.dart';
+import '../ads/google_mobile_ads.dart';
 import '../models/model.dart';
 import 'graph/blood_pressure_graph.dart';
 
@@ -831,6 +832,7 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
           ),
         ]),
       ),
+      bottomNavigationBar: const AdBannerWidget(), //
     );
   }
 

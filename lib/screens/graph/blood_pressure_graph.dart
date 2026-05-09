@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../ads/google_mobile_ads.dart';
 import '../../models/model.dart';
 
 class BloodPressureGraph extends StatefulWidget {
@@ -113,6 +114,7 @@ class _BloodPressureGraphState extends State<BloodPressureGraph> {
         body: const Center(
           child: Text("グラフデータがありません。"),
         ),
+        bottomNavigationBar: const AdBannerWidget(), //
       );
     }
 
