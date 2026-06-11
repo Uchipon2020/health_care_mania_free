@@ -123,6 +123,84 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
     internalController.text = widget.model.internal_47;
   }
 
+  // 2択セレクター（所見なし/あり、異常なし/あり）
+  Widget _binarySelector(
+    BuildContext context, {
+    required String label,
+    IconData? icon,
+    required TextEditingController controller,
+    required List<String> options,
+    required VoidCallback onChanged,
+  }) {
+    final ts = Theme.of(context).textTheme.titleMedium;
+    final current = controller.text;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: ts,
+          icon: icon != null ? Icon(icon) : null,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        ),
+        child: ToggleButtons(
+          isSelected: options.map((o) => o == current).toList(),
+          onPressed: (i) => setState(() {
+            controller.text = options[i];
+            onChanged();
+          }),
+          borderRadius: BorderRadius.circular(6),
+          constraints: const BoxConstraints(minHeight: 36),
+          children: options
+              .map((o) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(o, style: ts),
+                  ))
+              .toList(),
+        ),
+      ),
+    );
+  }
+
+  // 4択セレクター（ー / + / ++ / +++）
+  Widget _quadSelector(
+    BuildContext context, {
+    required String label,
+    required TextEditingController controller,
+    required VoidCallback onChanged,
+  }) {
+    const options = ['ー', '+', '++', '+++'];
+    final ts = Theme.of(context).textTheme.titleMedium;
+    final current = controller.text;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: InputDecorator(
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: ts,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        ),
+        child: ToggleButtons(
+          isSelected: options.map((o) => o == current).toList(),
+          onPressed: (i) => setState(() {
+            controller.text = options[i];
+            onChanged();
+          }),
+          borderRadius: BorderRadius.circular(6),
+          constraints: const BoxConstraints(minHeight: 36),
+          children: options
+              .map((o) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(o, style: ts),
+                  ))
+              .toList(),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.bodySmall;
@@ -332,109 +410,11 @@ class _ModelDetailScreenState extends State<ModelDetailScreen> {
                 ],
               ),
             ),
-            //聴力1000Hz
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 2.5),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    // 3 Element　聴力1000Hz　右
-                    child: TextField(
-                      controller: hR1000Controller,
-                      style: textStyle,
-                      //keyboardType:TextInputType.number,
-                      onChanged: (value) {
-                        debugPrint(
-                            'Something changed in Description Text Field');
-                        updateHearing_r_1000();
-                      },
-                      decoration: InputDecoration(
-                        labelText: '右聴力1000',
-                        labelStyle: textStyle,
-                        icon: const Icon(Icons.hearing),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 5.0,
-                  ),
-                  Expanded(
-                    // 5 Element　聴力1000　左
-                    child: TextField(
-                      controller: hL1000Controller,
-                      style: textStyle,
-                      // keyboardType:TextInputType.number,
-                      onChanged: (value) {
-                        debugPrint(
-                            'Something changed in Description Text Field');
-                        updateHearing_l_1000();
-                      },
-                      decoration: InputDecoration(
-                        labelText: '左聴力1000',
-                        labelStyle: textStyle,
-                        icon: const Icon(Icons.hearing),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //聴力4000Hz
-            Padding(
-              padding: const EdgeInsets.only(top: 2.5, bottom: 10.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    // 3 Element　聴力4000Hz　右
-                    child: TextField(
-                      controller: hR4000Controller,
-                      style: textStyle,
-                      //keyboardType:TextInputType.number,
-                      onChanged: (value) {
-                        debugPrint(
-                            'Something changed in Description Text Field');
-                        updateHearing_r_4000();
-                      },
-
-                      decoration: InputDecoration(
-                        labelText: '右聴力4000',
-                        icon: const Icon(Icons.hearing),
-                        labelStyle: textStyle,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 5.0,
-                  ),
-                  Expanded(
-                    // 5 Element　聴力4000　左
-                    child: TextField(
-                      controller: hL4000Controller,
-                      style: textStyle,
-                      //keyboardType:TextInputType.number,
-                      onChanged: (value) {
-                        debugPrint(
-                            'Something changed in Description Text Field');
-                        updateHearing_l_4000();
-                      },
-                      decoration: InputDecoration(
-                        labelText: '左聴力4000',
-                        labelStyle: textStyle,
-                        icon: const Icon(Icons.hearing),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            //聴力
+            _binarySelector(context, label: '右聴力 1000Hz', icon: Icons.hearing, controller: hR1000Controller, options: ['異常なし', '異常あり'], onChanged: updateHearing_r_1000),
+            _binarySelector(context, label: '左聴力 1000Hz', icon: Icons.hearing, controller: hL1000Controller, options: ['異常なし', '異常あり'], onChanged: updateHearing_l_1000),
+            _binarySelector(context, label: '右聴力 4000Hz', icon: Icons.hearing, controller: hR4000Controller, options: ['異常なし', '異常あり'], onChanged: updateHearing_r_4000),
+            _binarySelector(context, label: '左聴力 4000Hz', icon: Icons.hearing, controller: hL4000Controller, options: ['異常なし', '異常あり'], onChanged: updateHearing_l_4000),
             //血圧横並び表示----------------
             Padding(
               padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),

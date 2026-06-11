@@ -4,6 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sqflite/sqflite.dart';
 import '../main.dart';
 import '../models/model.dart';
+import '../utils/csv_exporter.dart';
 import '../utils/database_helper.dart';
 import 'model_detail_screen.dart';
 import 'model_view_screen.dart';
@@ -50,6 +51,28 @@ class ModelListScreenState extends State<ModelListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('HEALTHCARE MANIA'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.download),
+            tooltip: 'CSVエクスポート',
+            onPressed: () async {
+              final dbHelper = DatabaseHelper();
+              final modelList = await dbHelper.getModelList();
+              if (modelList.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('データがありません')),
+                );
+                return;
+              }
+              await CsvExporter.export(modelList);
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.lock_outline),
+            tooltip: '有料版の機能',
+            onPressed: () => _showUpgradeDialog(context),
+          ),
+        ],
       ),
       body:getModelListView(),
       bottomNavigationBar: const AdBannerWidget(),
@@ -188,6 +211,32 @@ class ModelListScreenState extends State<ModelListScreen> {
         });
       });
     });
+  }
+
+  void _showUpgradeDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('有料版の機能です'),
+        content: const Text(
+          '・基準値超えの赤ハイライト\n'
+          '・前回との比較（▲▼表示）\n'
+          '・ダッシュボード画面\n'
+          '・眼科・腫瘍マーカー項目\n\n'
+          '有料版にアップグレードすると\nすべての機能が使えます。',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('閉じる'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('有料版を見る'),
+          ),
+        ],
+      ),
+    );
   }
 
   // 日本語の日付文字列をDateTimeに変換する関数

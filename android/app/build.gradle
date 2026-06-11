@@ -66,3 +66,7 @@ android {
 flutter {
     source '../..'
 }
+
+dependencies {
+    implementation 'androidx.fragment:fragment:1.8.9'
+}

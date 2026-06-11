@@ -830,9 +830,46 @@ class _ModelViewScreenState extends State<ModelViewScreen> {
               ],
             ),
           ),
+          Card(
+            color: Colors.amber[50],
+            margin: const EdgeInsets.all(12),
+            child: ListTile(
+              leading: const Icon(Icons.lock, color: Colors.orange),
+              title: const Text('有料版でもっと便利に'),
+              subtitle: const Text('基準値ハイライト・比較・ダッシュボード・CSV出力'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => _showUpgradeDialog(context),
+            ),
+          ),
         ]),
       ),
-      bottomNavigationBar: const AdBannerWidget(), //
+      bottomNavigationBar: const AdBannerWidget(),
+    );
+  }
+
+  void _showUpgradeDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('有料版の機能です'),
+        content: const Text(
+          '・基準値超えの赤ハイライト\n'
+          '・前回との比較（▲▼表示）\n'
+          '・ダッシュボード画面\n'
+          '・眼科・腫瘍マーカー項目\n\n'
+          '有料版にアップグレードすると\nすべての機能が使えます。',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('閉じる'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('有料版を見る'),
+          ),
+        ],
+      ),
     );
   }
 
